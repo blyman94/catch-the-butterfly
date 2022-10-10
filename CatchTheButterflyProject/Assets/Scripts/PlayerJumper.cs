@@ -6,24 +6,19 @@ using UnityEngine;
 public class PlayerJumper : MonoBehaviour
 {
     /// <summary>
+    /// Settings from which gameplay setting values are read.
+    /// </summary>
+    public GameplaySettings GameplaySettings { get; set; }
+
+    /// <summary>
     /// Rigidbody of the Player object.
     /// </summary>
-    [SerializeField] private Rigidbody _playerRb;
+    public Rigidbody Rb { get; set; }
 
     /// <summary>
     /// Sensor3D determining if the Player object is grounded.
     /// </summary>
-    [SerializeField] private Sensor3D groundSensor3D;
-
-    /// <summary>
-    /// Instantaneous force applied to the Player object during a jump.
-    /// </summary>
-    [SerializeField] private float _jumpForce;
-
-    /// <summary>
-    /// Number of total jumps the Player can execute without grounding.
-    /// </summary>
-    [SerializeField] private int numJumpsTotal = 1;
+    public Sensor3D GroundSensor { get; set; }
 
     /// <summary>
     /// How many jumps the Player has remaining before they must ground.
@@ -33,15 +28,15 @@ public class PlayerJumper : MonoBehaviour
     #region MonoBehaviour Methods
     private void Start()
     {
-        numJumpsCurrent = numJumpsTotal;
+        numJumpsCurrent = GameplaySettings.TotalJumpCount;
     }
     private void OnEnable()
     {
-        groundSensor3D.SensorStateChanged += ResetJumpCount;
+        GroundSensor.SensorStateChanged += ResetJumpCount;
     }
     private void OnDisable()
     {
-        groundSensor3D.SensorStateChanged -= ResetJumpCount;
+        GroundSensor.SensorStateChanged -= ResetJumpCount;
     }
     #endregion
 
@@ -50,11 +45,12 @@ public class PlayerJumper : MonoBehaviour
     /// </summary>
     public void Jump()
     {
-        if (groundSensor3D.Active || numJumpsCurrent > 0)
+        if (GroundSensor.Active || numJumpsCurrent > 0)
         {
-            groundSensor3D.DisabledTimer = 0.1f;
-            _playerRb.AddForce(new Vector3(0.0f, _jumpForce, 0.0f), 
-                ForceMode.Impulse);
+            GroundSensor.DisabledTimer = 0.1f;
+            Vector3 jumpForce =
+                new Vector3(0.0f, GameplaySettings.JumpForce, 0.0f);
+            Rb.AddForce(jumpForce, ForceMode.Impulse);
             numJumpsCurrent--;
         }
     }
@@ -64,9 +60,9 @@ public class PlayerJumper : MonoBehaviour
     /// </summary>
     public void ResetJumpCount()
     {
-        if (groundSensor3D.Active)
+        if (GroundSensor.Active)
         {
-            numJumpsCurrent = numJumpsTotal;
+            numJumpsCurrent = GameplaySettings.TotalJumpCount;
         }
     }
 }

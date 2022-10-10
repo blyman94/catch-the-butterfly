@@ -6,15 +6,14 @@ using UnityEngine;
 public class CustomGravity3D : MonoBehaviour
 {
     /// <summary>
-    /// Rigidbody that gravity will be customized for.
+    /// Settings from which gameplay setting values are read.
     /// </summary>
-    [SerializeField] private Rigidbody _rb;
+    public GameplaySettings GameplaySettings { get; set; }
 
     /// <summary>
-    /// Amount by which gravity should be scaled. Final gravity will be equal
-    /// to globalGravity * gravityScale.
+    /// Rigidbody that gravity will be customized for.
     /// </summary>
-    public float gravityScale = 1.0f;
+    public Rigidbody Rb { get; set; }
 
     // Global Gravity doesn't appear in the inspector. Modify it here in the code
     // (or via scripting) to define a different default gravity for all objects.
@@ -23,13 +22,14 @@ public class CustomGravity3D : MonoBehaviour
     #region MonoBehaviour Methods
     void OnEnable()
     {
-        _rb.useGravity = false;
+        Rb.useGravity = false;
     }
 
     void FixedUpdate()
     {
-        Vector3 gravity = globalGravity * gravityScale * Vector3.up;
-        _rb.AddForce(gravity, ForceMode.Acceleration);
+        Vector3 gravity = 
+            globalGravity * GameplaySettings.GravityScale * Vector3.up;
+        Rb.AddForce(gravity, ForceMode.Acceleration);
     }
     #endregion
 }

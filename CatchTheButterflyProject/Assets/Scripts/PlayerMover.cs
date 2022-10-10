@@ -6,14 +6,19 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     /// <summary>
-    /// Rigidbody of the Player object.
+    /// Settings from which gameplay setting values are read.
     /// </summary>
-    [SerializeField] private Rigidbody _playerRb;
+    public GameplaySettings GameplaySettings { get; set; }
 
     /// <summary>
-    /// Force applied over frames to move the Player along the x axis.
+    /// Rigidbody of the Player object.
     /// </summary>
-    [SerializeField] private float _moveForce;
+    public Rigidbody Rb { get; set; }
+
+    /// <summary>
+    /// Sensor3D determining if the Player object is grounded.
+    /// </summary>
+    public Sensor3D GroundSensor { get; set; }
 
     /// <summary>
     /// Represents the current move input for the Player object.
@@ -31,7 +36,19 @@ public class PlayerMover : MonoBehaviour
     {
         if (Mathf.Abs(MoveInput.magnitude) >= moveThreshold)
         {
-            _playerRb.AddForce(new Vector3(-MoveInput.x, 0.0f, 0.0f) * _moveForce * Time.deltaTime);
+            if (GroundSensor.Active)
+            {
+                Rb.AddForce(new Vector3(-MoveInput.x, 0.0f, 0.0f) *
+                    GameplaySettings.MoveForceGrounded * Time.deltaTime);
+            }
+            else
+            {
+                if (GameplaySettings.CanMoveInAir)
+                {
+                    Rb.AddForce(new Vector3(-MoveInput.x, 0.0f, 0.0f) *
+                        GameplaySettings.MoveForceAirborne * Time.deltaTime);
+                }
+            }
         }
     }
     #endregion
