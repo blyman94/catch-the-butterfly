@@ -8,7 +8,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameplaySettings GameplaySettings;
-    
+
     [Header("Physics Components")]
     [SerializeField] private Rigidbody Rb;
     [SerializeField] private Sensor3D GroundSensor;
