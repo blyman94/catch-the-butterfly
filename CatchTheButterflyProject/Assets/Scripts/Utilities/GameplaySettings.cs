@@ -7,6 +7,21 @@ using UnityEngine;
 public class GameplaySettings : ScriptableObject
 {
     /// <summary>
+    /// How long should the camera shake when a player collides with a rock? The
+    /// shake intensity will fade out over this time.
+    /// </summary>
+    [Tooltip("How long should the camera shake when a player collides with " +
+        "a rock? The shake intensity will fade out over this time.")]
+    public float CameraShakeDuration = 0.5f;
+
+    /// <summary>
+    /// How much should the camera shake when a player collides with a rock?
+    /// </summary>
+    [Tooltip("How much should the camera shake when a player collides with " + 
+        "a rock?")]
+    public float CameraShakeIntensity = 5.0f;
+
+    /// <summary>
     /// Can the player adjust its movement in the air?
     /// </summary>
     [Tooltip("Can the player adjust its movement in the air?")]
@@ -30,7 +45,7 @@ public class GameplaySettings : ScriptableObject
     /// Instantaneous force applied to the Player object during a jump.
     /// </summary>
     [Tooltip("Instantaneous force applied to the Player object during a jump.")]
-    public float JumpForce = 10;
+    public float JumpForce = 10.0f;
 
     /// <summary>
     /// Force applied over time to move the Player along the x axis while 
@@ -38,7 +53,7 @@ public class GameplaySettings : ScriptableObject
     /// </summary>
     [Tooltip("Force applied over time to move the Player along the " +
         "x axis while airborne.")]
-    public float MoveForceAirborne = 50;
+    public float MoveForceAirborne = 50.0f;
 
     /// <summary>
     /// Force applied over time to move the Player along the x axis while 
@@ -46,7 +61,7 @@ public class GameplaySettings : ScriptableObject
     /// </summary>
     [Tooltip("Force applied over time to move the Player along the " + 
         "x axis while grounded.")]
-    public float MoveForceGrounded = 50;
+    public float MoveForceGrounded = 50.0f;
 
     /// <summary>
     /// Can the player jump more than once?

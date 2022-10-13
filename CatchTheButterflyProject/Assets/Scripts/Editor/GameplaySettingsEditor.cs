@@ -20,6 +20,8 @@ public class GameplaySettingsEditor : Editor
     private SerializedProperty _totalJumpCountProperty;
 
     // Drowning Effect
+    private SerializedProperty _cameraShakeDuration;
+    private SerializedProperty _cameraShakeIntensity;
     private SerializedProperty _drownEffectFadeTimeProperty;
     private SerializedProperty _vignetteIntensityProperty;
 
@@ -40,6 +42,8 @@ public class GameplaySettingsEditor : Editor
         _multiJumpProperty = serializedObject.FindProperty("MultiJump");
         _totalJumpCountProperty = serializedObject.FindProperty("TotalJumpCount");
 
+        _cameraShakeDuration = serializedObject.FindProperty("CameraShakeDuration");
+        _cameraShakeIntensity = serializedObject.FindProperty("CameraShakeIntensity");
         _drownEffectFadeTimeProperty = serializedObject.FindProperty("DrownEffectFadeTime");
         _vignetteIntensityProperty = serializedObject.FindProperty("VignetteIntensity");
     }
@@ -79,6 +83,8 @@ public class GameplaySettingsEditor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Drown Effect", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(_cameraShakeDuration);
+        EditorGUILayout.PropertyField(_cameraShakeIntensity);
         EditorGUILayout.PropertyField(_drownEffectFadeTimeProperty);
         EditorGUILayout.PropertyField(_vignetteIntensityProperty);
         
