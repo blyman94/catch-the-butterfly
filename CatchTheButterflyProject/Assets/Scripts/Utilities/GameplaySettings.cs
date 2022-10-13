@@ -7,19 +7,11 @@ using UnityEngine;
 public class GameplaySettings : ScriptableObject
 {
     /// <summary>
-    /// How long should the camera shake when a player collides with a rock? The
-    /// shake intensity will fade out over this time.
-    /// </summary>
-    [Tooltip("How long should the camera shake when a player collides with " +
-        "a rock? The shake intensity will fade out over this time.")]
-    public float CameraShakeDuration = 0.5f;
-
-    /// <summary>
     /// How much should the camera shake when a player collides with a rock?
     /// </summary>
     [Tooltip("How much should the camera shake when a player collides with " + 
         "a rock?")]
-    public float CameraShakeIntensity = 5.0f;
+    public float CameraShakeIntensity = 2.0f;
 
     /// <summary>
     /// Can the player adjust its movement in the air?
@@ -74,6 +66,25 @@ public class GameplaySettings : ScriptableObject
     /// </summary>
     [Tooltip("Number of total jumps the Player can execute without grounding.")]
     public int TotalJumpCount = 1;
+
+    /// <summary>
+    /// Should the camera shake when the drown sequence starts?
+    /// </summary>
+    [Tooltip("Should the camera shake when the drown sequence starts?")]
+    public bool UseCameraShake = false;
+
+    /// <summary>
+    /// Should a the colors fade to black and white when the drown sequence starts?
+    /// </summary>
+    [Tooltip("Should a the colors fade to black and white when the drown " +
+        "sequence starts?")]
+    public bool UseColorDesaturation = true;
+
+    /// <summary>
+    /// Should a vignette appear when the drown sequence starts?
+    /// </summary>
+    [Tooltip("Should a vignette appear when the drown sequence starts?")]
+    public bool UseVignette = true;
 
     /// <summary>
     /// How much of the screen should be covered by the drown event vignette

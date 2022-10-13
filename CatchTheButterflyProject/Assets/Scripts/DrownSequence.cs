@@ -68,12 +68,19 @@ public class DrownSequence : MonoBehaviour
 
         while (elapsedTime < gameplaySettings.DrownEffectFadeTime)
         {
-            _vignette.intensity.value = Mathf.Lerp(currentVignetteIntensity,
+            if (gameplaySettings.UseColorDesaturation)
+            {
+                _colorAdjustments.saturation.value =
+                    Mathf.Lerp(currentColorAdjustmentsSaturation, -100.0f,
+                    elapsedTime / gameplaySettings.DrownEffectFadeTime);
+            }
+            if (gameplaySettings.UseVignette)
+            {
+                _vignette.intensity.value = Mathf.Lerp(currentVignetteIntensity,
                 gameplaySettings.VignetteIntensity,
                 elapsedTime / gameplaySettings.DrownEffectFadeTime);
-            _colorAdjustments.saturation.value =
-                Mathf.Lerp(currentColorAdjustmentsSaturation, -100.0f,
-                elapsedTime / gameplaySettings.DrownEffectFadeTime);
+            }
+            
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -93,7 +100,7 @@ public class DrownSequence : MonoBehaviour
     {
         float elapsedTime = 0.0f;
         float currentVignetteIntensity = _vignette.intensity.value;
-        float currentColorAdjustmentsSaturation = 
+        float currentColorAdjustmentsSaturation =
             _colorAdjustments.saturation.value;
 
         while (elapsedTime < gameplaySettings.DrownEffectFadeTime)

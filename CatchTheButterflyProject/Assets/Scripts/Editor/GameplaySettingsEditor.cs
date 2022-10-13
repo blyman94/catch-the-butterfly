@@ -20,9 +20,11 @@ public class GameplaySettingsEditor : Editor
     private SerializedProperty _totalJumpCountProperty;
 
     // Drowning Effect
-    private SerializedProperty _cameraShakeDuration;
     private SerializedProperty _cameraShakeIntensity;
     private SerializedProperty _drownEffectFadeTimeProperty;
+    private SerializedProperty _useCameraShakeProperty;
+    private SerializedProperty _useVignetteProperty;
+    private SerializedProperty _useColorDesaturationProperty;
     private SerializedProperty _vignetteIntensityProperty;
 
     /// <summary>
@@ -42,9 +44,11 @@ public class GameplaySettingsEditor : Editor
         _multiJumpProperty = serializedObject.FindProperty("MultiJump");
         _totalJumpCountProperty = serializedObject.FindProperty("TotalJumpCount");
 
-        _cameraShakeDuration = serializedObject.FindProperty("CameraShakeDuration");
         _cameraShakeIntensity = serializedObject.FindProperty("CameraShakeIntensity");
         _drownEffectFadeTimeProperty = serializedObject.FindProperty("DrownEffectFadeTime");
+        _useCameraShakeProperty = serializedObject.FindProperty("UseCameraShake");
+        _useVignetteProperty = serializedObject.FindProperty("UseVignette");
+        _useColorDesaturationProperty = serializedObject.FindProperty("UseColorDesaturation");
         _vignetteIntensityProperty = serializedObject.FindProperty("VignetteIntensity");
     }
 
@@ -83,11 +87,22 @@ public class GameplaySettingsEditor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Drown Effect", EditorStyles.boldLabel);
-        EditorGUILayout.PropertyField(_cameraShakeDuration);
-        EditorGUILayout.PropertyField(_cameraShakeIntensity);
         EditorGUILayout.PropertyField(_drownEffectFadeTimeProperty);
-        EditorGUILayout.PropertyField(_vignetteIntensityProperty);
-        
+
+        EditorGUILayout.PropertyField(_useCameraShakeProperty);
+        if (_useCameraShakeProperty.boolValue)
+        {
+            EditorGUILayout.PropertyField(_cameraShakeIntensity);
+        }
+
+        EditorGUILayout.PropertyField(_useColorDesaturationProperty);
+
+        EditorGUILayout.PropertyField(_useVignetteProperty);
+        if (_useVignetteProperty.boolValue)
+        {
+            EditorGUILayout.PropertyField(_vignetteIntensityProperty);
+        }
+
         EditorGUILayout.Space();
 
         showInfo = EditorGUILayout.Foldout(showInfo, "Info");

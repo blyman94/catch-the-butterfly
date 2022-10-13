@@ -30,8 +30,8 @@ public class CinemachineCameraShake : MonoBehaviour
         if (timer > 0.0f)
         {
             cinemachineBasicMultiChannelPerlin.m_AmplitudeGain =
-                Mathf.Lerp(gameplaySettings.CameraShakeIntensity, 0.0f, 
-                1 - (timer / gameplaySettings.CameraShakeDuration));
+                Mathf.Lerp(gameplaySettings.CameraShakeIntensity, 0.0f,
+                1 - (timer / gameplaySettings.DrownEffectFadeTime));
             timer -= Time.deltaTime;
         }
     }
@@ -43,7 +43,10 @@ public class CinemachineCameraShake : MonoBehaviour
     /// </summary>
     public void StartCameraShake()
     {
-        timer = gameplaySettings.CameraShakeDuration;
+        if (gameplaySettings.UseCameraShake)
+        {
+            timer = gameplaySettings.DrownEffectFadeTime;
+        }
     }
 
     /// <summary>
