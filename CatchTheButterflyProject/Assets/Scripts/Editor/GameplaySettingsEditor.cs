@@ -9,15 +9,19 @@ using UnityEditor;
 public class GameplaySettingsEditor : Editor
 {
     // Movement
-    private SerializedProperty _moveForceGroundedProperty;
-    private SerializedProperty _moveForceAirborneProperty;
     private SerializedProperty _canMoveInAirProperty;
+    private SerializedProperty _moveForceAirborneProperty;
+    private SerializedProperty _moveForceGroundedProperty;
 
     // Jumping & Gravity
-    private SerializedProperty _jumpFroceProperty;
     private SerializedProperty _gravityScaleProperty;
+    private SerializedProperty _jumpFroceProperty;
     private SerializedProperty _multiJumpProperty;
     private SerializedProperty _totalJumpCountProperty;
+
+    // Drowning Effect
+    private SerializedProperty _drownEffectFadeTimeProperty;
+    private SerializedProperty _vignetteIntensityProperty;
 
     /// <summary>
     /// Should info be displayed in the editor?
@@ -27,13 +31,17 @@ public class GameplaySettingsEditor : Editor
     #region Editor Methods
     private void OnEnable()
     {
-        _moveForceGroundedProperty = serializedObject.FindProperty("MoveForceGrounded");
-        _moveForceAirborneProperty = serializedObject.FindProperty("MoveForceAirborne");
         _canMoveInAirProperty = serializedObject.FindProperty("CanMoveInAir");
-        _jumpFroceProperty = serializedObject.FindProperty("JumpForce");
+        _moveForceAirborneProperty = serializedObject.FindProperty("MoveForceAirborne");
+        _moveForceGroundedProperty = serializedObject.FindProperty("MoveForceGrounded");
+
         _gravityScaleProperty = serializedObject.FindProperty("GravityScale");
+        _jumpFroceProperty = serializedObject.FindProperty("JumpForce");
         _multiJumpProperty = serializedObject.FindProperty("MultiJump");
         _totalJumpCountProperty = serializedObject.FindProperty("TotalJumpCount");
+
+        _drownEffectFadeTimeProperty = serializedObject.FindProperty("DrownEffectFadeTime");
+        _vignetteIntensityProperty = serializedObject.FindProperty("VignetteIntensity");
     }
 
     public override void OnInspectorGUI()
@@ -68,6 +76,12 @@ public class GameplaySettingsEditor : Editor
             _totalJumpCountProperty.intValue = 1;
         }
 
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField("Drown Effect", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(_drownEffectFadeTimeProperty);
+        EditorGUILayout.PropertyField(_vignetteIntensityProperty);
+        
         EditorGUILayout.Space();
 
         showInfo = EditorGUILayout.Foldout(showInfo, "Info");
