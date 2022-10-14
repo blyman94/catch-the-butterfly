@@ -4,7 +4,7 @@ using UnityEngine;
 /// Allows designers to configure responses to OnTriggerEnter, OnTriggerStay,
 /// and OnTriggerExit with a specific tag all in the inspector.
 /// </summary>
-public class PlayerTriggerDataRelay : MonoBehaviour
+public class TriggerDataRelay : MonoBehaviour
 {
     [SerializeField] private TriggerResponse[] triggerResponses;
 

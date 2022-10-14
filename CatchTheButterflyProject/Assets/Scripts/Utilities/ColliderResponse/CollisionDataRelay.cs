@@ -5,7 +5,7 @@ using UnityEngine;
 /// OnCollisionStay, and OnCollisionExit with a specific tag all in the 
 /// inspector.
 /// </summary>
-public class PlayerCollisionDataRelay : MonoBehaviour
+public class CollisionDataRelay : MonoBehaviour
 {
     [SerializeField] private CollisionResponse[] collisionResponses;
 
