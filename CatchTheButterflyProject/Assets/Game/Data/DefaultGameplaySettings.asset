@@ -16,6 +16,7 @@ MonoBehaviour:
   CanMoveInAir: 0
   DrownEffectFadeTime: 1
   GravityScale: 0.25
+  GraphicsBlinkCount: 10
   JumpForce: 2
   MoveForceAirborne: 50
   MoveForceGrounded: 50
@@ -23,5 +24,6 @@ MonoBehaviour:
   TotalJumpCount: 1
   UseCameraShake: 1
   UseColorDesaturation: 1
+  UseGraphicsBlink: 0
   UseVignette: 1
   VignetteIntensity: 0.6

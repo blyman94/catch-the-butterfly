@@ -8,10 +8,10 @@ using UnityEngine;
 /// </summary>
 public class GraphicsBlinkSequence : MonoBehaviour
 {
+    [SerializeField] private GameplaySettings _gameplaySettings;
     [SerializeField] private MeshRenderer _graphicsRenderer;
     [SerializeField] private GameEvent _graphicsBlinkEndEvent;
-    [SerializeField] private int _blinkCount;
-    [SerializeField] private float _blinkDuration;
+    [SerializeField] private GameEvent _graphicsBlinkStartEvent;
 
     private float _effectTimer;
     private float _blinkTimer;
@@ -44,10 +44,16 @@ public class GraphicsBlinkSequence : MonoBehaviour
     /// </summary>
     public void StartSequence()
     {
-        _effectTimer = _blinkDuration;
-        _timeBetweenBlinks = (_blinkDuration / _blinkCount) / 2.0f;
-        _blinkTimer = _timeBetweenBlinks;
+        if (_gameplaySettings.UseGraphicsBlink)
+        {
+            _graphicsBlinkStartEvent?.Raise();
+            _effectTimer = _gameplaySettings.DrownEffectFadeTime;
+            _timeBetweenBlinks =
+                (_gameplaySettings.DrownEffectFadeTime /
+                _gameplaySettings.GraphicsBlinkCount) * 0.5f;
+            _blinkTimer = _timeBetweenBlinks;
 
-        _graphicsRenderer.enabled = false;
+            _graphicsRenderer.enabled = false;
+        }
     }
 }

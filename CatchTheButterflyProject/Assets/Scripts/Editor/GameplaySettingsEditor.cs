@@ -19,10 +19,12 @@ public class GameplaySettingsEditor : Editor
     private SerializedProperty _multiJumpProperty;
     private SerializedProperty _totalJumpCountProperty;
 
-    // Drowning Effect
+    // Drown Effect
     private SerializedProperty _cameraShakeIntensity;
     private SerializedProperty _drownEffectFadeTimeProperty;
+    private SerializedProperty _graphicsBlinkCountProperty;
     private SerializedProperty _useCameraShakeProperty;
+    private SerializedProperty _useGraphicsBlinkProperty;
     private SerializedProperty _useVignetteProperty;
     private SerializedProperty _useColorDesaturationProperty;
     private SerializedProperty _vignetteIntensityProperty;
@@ -35,18 +37,23 @@ public class GameplaySettingsEditor : Editor
     #region Editor Methods
     private void OnEnable()
     {
+        // Movement
         _canMoveInAirProperty = serializedObject.FindProperty("CanMoveInAir");
         _moveForceAirborneProperty = serializedObject.FindProperty("MoveForceAirborne");
         _moveForceGroundedProperty = serializedObject.FindProperty("MoveForceGrounded");
 
+        // Jump & Gravity
         _gravityScaleProperty = serializedObject.FindProperty("GravityScale");
         _jumpFroceProperty = serializedObject.FindProperty("JumpForce");
         _multiJumpProperty = serializedObject.FindProperty("MultiJump");
         _totalJumpCountProperty = serializedObject.FindProperty("TotalJumpCount");
 
+        // Drown Effect
         _cameraShakeIntensity = serializedObject.FindProperty("CameraShakeIntensity");
         _drownEffectFadeTimeProperty = serializedObject.FindProperty("DrownEffectFadeTime");
+        _graphicsBlinkCountProperty = serializedObject.FindProperty("GraphicsBlinkCount");
         _useCameraShakeProperty = serializedObject.FindProperty("UseCameraShake");
+        _useGraphicsBlinkProperty = serializedObject.FindProperty("UseGraphicsBlink");
         _useVignetteProperty = serializedObject.FindProperty("UseVignette");
         _useColorDesaturationProperty = serializedObject.FindProperty("UseColorDesaturation");
         _vignetteIntensityProperty = serializedObject.FindProperty("VignetteIntensity");
@@ -93,6 +100,12 @@ public class GameplaySettingsEditor : Editor
         if (_useCameraShakeProperty.boolValue)
         {
             EditorGUILayout.PropertyField(_cameraShakeIntensity);
+        }
+
+        EditorGUILayout.PropertyField(_useGraphicsBlinkProperty);
+        if (_useGraphicsBlinkProperty.boolValue)
+        {
+            EditorGUILayout.PropertyField(_graphicsBlinkCountProperty);
         }
 
         EditorGUILayout.PropertyField(_useColorDesaturationProperty);

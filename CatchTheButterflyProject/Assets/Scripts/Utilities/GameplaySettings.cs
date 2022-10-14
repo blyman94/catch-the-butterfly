@@ -34,6 +34,14 @@ public class GameplaySettings : ScriptableObject
     public float GravityScale = 0.25f;
 
     /// <summary>
+    /// How many times should the player's graphics blink? Note: Duration of the 
+    /// blink is driven by the DrownEffectFadeTime.
+    /// </summary>
+    [Tooltip("How many times should the player's graphics blink? Note: " + 
+        "Duration of the blink effect is driven by the DrownEffectFadeTime.")]
+    public int GraphicsBlinkCount = 10;
+
+    /// <summary>
     /// Instantaneous force applied to the Player object during a jump.
     /// </summary>
     [Tooltip("Instantaneous force applied to the Player object during a jump.")]
@@ -74,11 +82,18 @@ public class GameplaySettings : ScriptableObject
     public bool UseCameraShake = false;
 
     /// <summary>
-    /// Should a the colors fade to black and white when the drown sequence starts?
+    /// Should a the colors fade to black and white when the drown sequence 
+    /// starts?
     /// </summary>
     [Tooltip("Should a the colors fade to black and white when the drown " +
         "sequence starts?")]
     public bool UseColorDesaturation = true;
+
+    /// <summary>
+    /// Should the player's graphics blink when they hit a rock?
+    /// </summary>
+    [Tooltip("Should the player's graphics blink when they hit a rock?")]
+    public bool UseGraphicsBlink = true;
 
     /// <summary>
     /// Should a vignette appear when the drown sequence starts?
