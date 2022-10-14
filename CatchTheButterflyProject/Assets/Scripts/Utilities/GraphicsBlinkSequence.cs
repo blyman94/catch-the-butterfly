@@ -9,6 +9,7 @@ using UnityEngine;
 public class GraphicsBlinkSequence : MonoBehaviour
 {
     [SerializeField] private MeshRenderer _graphicsRenderer;
+    [SerializeField] private GameEvent _graphicsBlinkEndEvent;
     [SerializeField] private int _blinkCount;
     [SerializeField] private float _blinkDuration;
 
@@ -31,6 +32,7 @@ public class GraphicsBlinkSequence : MonoBehaviour
             if (_effectTimer <= 0.0f)
             {
                 _graphicsRenderer.enabled = true;
+                _graphicsBlinkEndEvent?.Raise();
             }
         }
     }
