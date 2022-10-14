@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69149293e604b194f854ba3575928650, type: 3}
   m_Name: DefaultGameplaySettings
   m_EditorClassIdentifier: 
-  MoveForceGrounded: 50
-  MoveForceAirborne: 100
+  CameraShakeIntensity: 2
   CanMoveInAir: 0
-  JumpForce: 2.5
+  DrownEffectFadeTime: 1
   GravityScale: 0.25
+  GraphicsBlinkCount: 10
+  JumpForce: 2
+  MoveForceAirborne: 50
+  MoveForceGrounded: 50
   MultiJump: 0
   TotalJumpCount: 1
+  UseCameraShake: 1
+  UseColorDesaturation: 1
+  UseGraphicsBlink: 0
+  UseVignette: 1
+  VignetteIntensity: 0.6

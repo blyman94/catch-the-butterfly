@@ -9,15 +9,25 @@ using UnityEditor;
 public class GameplaySettingsEditor : Editor
 {
     // Movement
-    private SerializedProperty _moveForceGroundedProperty;
-    private SerializedProperty _moveForceAirborneProperty;
     private SerializedProperty _canMoveInAirProperty;
+    private SerializedProperty _moveForceAirborneProperty;
+    private SerializedProperty _moveForceGroundedProperty;
 
     // Jumping & Gravity
-    private SerializedProperty _jumpFroceProperty;
     private SerializedProperty _gravityScaleProperty;
+    private SerializedProperty _jumpFroceProperty;
     private SerializedProperty _multiJumpProperty;
     private SerializedProperty _totalJumpCountProperty;
+
+    // Drown Effect
+    private SerializedProperty _cameraShakeIntensity;
+    private SerializedProperty _drownEffectFadeTimeProperty;
+    private SerializedProperty _graphicsBlinkCountProperty;
+    private SerializedProperty _useCameraShakeProperty;
+    private SerializedProperty _useGraphicsBlinkProperty;
+    private SerializedProperty _useVignetteProperty;
+    private SerializedProperty _useColorDesaturationProperty;
+    private SerializedProperty _vignetteIntensityProperty;
 
     /// <summary>
     /// Should info be displayed in the editor?
@@ -27,13 +37,26 @@ public class GameplaySettingsEditor : Editor
     #region Editor Methods
     private void OnEnable()
     {
-        _moveForceGroundedProperty = serializedObject.FindProperty("MoveForceGrounded");
-        _moveForceAirborneProperty = serializedObject.FindProperty("MoveForceAirborne");
+        // Movement
         _canMoveInAirProperty = serializedObject.FindProperty("CanMoveInAir");
-        _jumpFroceProperty = serializedObject.FindProperty("JumpForce");
+        _moveForceAirborneProperty = serializedObject.FindProperty("MoveForceAirborne");
+        _moveForceGroundedProperty = serializedObject.FindProperty("MoveForceGrounded");
+
+        // Jump & Gravity
         _gravityScaleProperty = serializedObject.FindProperty("GravityScale");
+        _jumpFroceProperty = serializedObject.FindProperty("JumpForce");
         _multiJumpProperty = serializedObject.FindProperty("MultiJump");
         _totalJumpCountProperty = serializedObject.FindProperty("TotalJumpCount");
+
+        // Drown Effect
+        _cameraShakeIntensity = serializedObject.FindProperty("CameraShakeIntensity");
+        _drownEffectFadeTimeProperty = serializedObject.FindProperty("DrownEffectFadeTime");
+        _graphicsBlinkCountProperty = serializedObject.FindProperty("GraphicsBlinkCount");
+        _useCameraShakeProperty = serializedObject.FindProperty("UseCameraShake");
+        _useGraphicsBlinkProperty = serializedObject.FindProperty("UseGraphicsBlink");
+        _useVignetteProperty = serializedObject.FindProperty("UseVignette");
+        _useColorDesaturationProperty = serializedObject.FindProperty("UseColorDesaturation");
+        _vignetteIntensityProperty = serializedObject.FindProperty("VignetteIntensity");
     }
 
     public override void OnInspectorGUI()
@@ -66,6 +89,31 @@ public class GameplaySettingsEditor : Editor
         else
         {
             _totalJumpCountProperty.intValue = 1;
+        }
+
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField("Drown Effect", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(_drownEffectFadeTimeProperty);
+
+        EditorGUILayout.PropertyField(_useCameraShakeProperty);
+        if (_useCameraShakeProperty.boolValue)
+        {
+            EditorGUILayout.PropertyField(_cameraShakeIntensity);
+        }
+
+        EditorGUILayout.PropertyField(_useGraphicsBlinkProperty);
+        if (_useGraphicsBlinkProperty.boolValue)
+        {
+            EditorGUILayout.PropertyField(_graphicsBlinkCountProperty);
+        }
+
+        EditorGUILayout.PropertyField(_useColorDesaturationProperty);
+
+        EditorGUILayout.PropertyField(_useVignetteProperty);
+        if (_useVignetteProperty.boolValue)
+        {
+            EditorGUILayout.PropertyField(_vignetteIntensityProperty);
         }
 
         EditorGUILayout.Space();
