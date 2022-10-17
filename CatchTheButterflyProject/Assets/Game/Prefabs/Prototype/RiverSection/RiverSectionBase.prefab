@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 74776555131260088}
   - component: {fileID: 4440969618078546184}
   - component: {fileID: 6007033009938401261}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RiverSectionBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}

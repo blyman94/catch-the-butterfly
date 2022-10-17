@@ -24,6 +24,6 @@ MonoBehaviour:
   TotalJumpCount: 1
   UseCameraShake: 1
   UseColorDesaturation: 1
-  UseGraphicsBlink: 0
+  UseGraphicsBlink: 1
   UseVignette: 1
   VignetteIntensity: 0.6
