@@ -1043,7 +1043,7 @@ GameObject:
   - component: {fileID: 2019245297761506441}
   - component: {fileID: 9142411574924300444}
   m_Layer: 8
-  m_Name: Particle System
+  m_Name: ButterflySparkleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5852,7 +5852,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7618555745522750888}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Butterfly
   m_TagString: Butterfly
   m_Icon: {fileID: 0}
