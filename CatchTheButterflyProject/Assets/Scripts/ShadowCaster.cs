@@ -13,7 +13,7 @@ public class ShadowCaster : MonoBehaviour
     private void FixedUpdate()
     {
         RaycastHit info;
-        Physics.Raycast(transform.position,Vector3.down, out info, Mathf.Infinity, _shadowCollisionLayerMask);
-        _shadowTransform.localPosition = new Vector3(0.0f,-info.distance + 0.01f ,0.0f);
+        Physics.Raycast(transform.position, Vector3.down, out info, Mathf.Infinity, _shadowCollisionLayerMask);
+        _shadowTransform.localPosition = new Vector3(0.0f, -info.distance + 0.01f, 0.0f);
     }
 }
