@@ -9,7 +9,7 @@
                     "name": "Movement",
                     "type": "PassThrough",
                     "id": "294bf194-7299-4dec-960e-88eb0ce79a1a",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -27,8 +27,8 @@
             "bindings": [
                 {
                     "name": "WASD [Keyboard]",
-                    "id": "7cd37a6c-c45b-4233-9925-7263033f1cff",
-                    "path": "1DAxis",
+                    "id": "23adebb3-7f7d-4ddc-94ae-dac3e9ed678c",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -37,19 +37,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "3f6f3f9b-5a1f-4d9a-b5c8-f35174ef5cd6",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "b2e33b3c-b2cf-4fa6-bff8-944e8f72ee34",
+                    "name": "up",
+                    "id": "012e5d53-fb5a-4c08-9c87-e90c2c0726de",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -59,9 +48,42 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "ArrowKeys [Keyboard]",
-                    "id": "2142ac84-5c36-4af2-9dae-f384098fa1d4",
-                    "path": "1DAxis",
+                    "name": "down",
+                    "id": "faf11ee1-712c-4be1-95c3-d7365d29c793",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "12468e28-5b3c-4937-8c3b-60b80f064ff6",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "09375565-1c31-4466-9c7c-a727d548a022",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Arrow Keys [Keyboard]",
+                    "id": "a4d12cea-5119-43f1-b7ca-e3c7fe046810",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -70,8 +92,19 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "b28f2bac-e61d-4f01-87c0-bf0573dfc7f8",
+                    "name": "up",
+                    "id": "a2350c14-f8a2-45c0-98df-9d6bbc96d054",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "e714aa24-d40a-4ee8-8b5a-b8ba5de85e58",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
@@ -81,9 +114,20 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "07b8c061-2eda-4a20-8d7f-d0406b21d3f3",
-                    "path": "<Keyboard>/upArrow",
+                    "name": "left",
+                    "id": "e30a9e4a-a682-41f3-8f94-50fc5295a1a6",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "b7ed0365-1ccb-445e-bbe4-0c967266b545",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

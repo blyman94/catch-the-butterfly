@@ -8,61 +8,35 @@ public class RiverSection : MonoBehaviour
     /// <summary>
     /// The direction in which the current will pull the player.
     /// </summary>
+    [Header("River Section Data")]
     [Tooltip("The direction in which the current will pull the player.")]
-    [SerializeField] private Vector2 direction;
+    [SerializeField] private Vector2 _direction;
 
     /// <summary>
-    /// Force at which objects carried will excellerate.
+    /// Force at which objects carried will accelerate.
     /// </summary>
-    [Tooltip("Force at which objects carried will excellerate.")]
-    [SerializeField] private float accelerationForce;
+    [Tooltip("Force at which objects carried will accelerate.")]
+    [SerializeField] private float _accelerationForce;
 
     /// <summary>
-    /// Maximum speed of carried objects.
+    /// Flow speed of carried objects.
     /// </summary>
-    [Tooltip("Maximum speed of carried objects.")]
-    [SerializeField] private float maxSpeed;
-
-    /// <summary>
-    /// Rigidbody of the player character who has entered the zone.
-    /// </summary>
-    private Rigidbody activeRb;
+    [Tooltip("Flow speed of carried objects.")]
+    [SerializeField] private float _flowSpeed;
+    
+    [Header("Storage Variables")]
+    [SerializeField] private FloatVariable _currentRiverSectionFlowSpeed;
+    [SerializeField] private FloatVariable _currentRiverSectionAccelerationForce;
+    [SerializeField] private Vector2Variable _currentRiverSectionDirection;
 
     #region MonoBehaviour Methods
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            activeRb = other.GetComponent<Rigidbody>();
-        }
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (activeRb != null)
-        {
-            float currentSpeed = Mathf.Abs(activeRb.velocity.z);
-
-            Vector3 forceToApply = Vector3.zero;
-
-            if (currentSpeed > maxSpeed)
-            {
-                float brakeSpeed = currentSpeed - maxSpeed;  // calculate the speed decrease
-                forceToApply = new Vector3(0.0f, 0.0f, -brakeSpeed);
-            }
-            else
-            {
-                forceToApply = new Vector3(direction.x, 0.0f, direction.y) *
-                    accelerationForce * Time.deltaTime;
-            }
-
-            activeRb.AddForce(forceToApply);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (activeRb != null)
-        {
-            activeRb = null;
+            _currentRiverSectionAccelerationForce.Value = _accelerationForce;
+            _currentRiverSectionDirection.Value = _direction;
+            _currentRiverSectionFlowSpeed.Value = _flowSpeed;
         }
     }
     #endregion

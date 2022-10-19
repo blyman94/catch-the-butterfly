@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: DefaultGameplaySettings
   m_EditorClassIdentifier: 
   CameraShakeIntensity: 2
-  CanMoveInAir: 0
+  DownstreamMaxSpeedIncrease: 0.5
   DrownEffectFadeTime: 1
   GravityScale: 0.25
   GraphicsBlinkCount: 10
   JumpForce: 2
-  MoveForceAirborne: 50
-  MoveForceGrounded: 50
+  MoveForceGrounded: 75
   MultiJump: 0
   TotalJumpCount: 1
+  UpstreamMaxSpeed: 0.5
   UseCameraShake: 1
   UseColorDesaturation: 1
   UseGraphicsBlink: 1

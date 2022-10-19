@@ -414,9 +414,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45b54ab7d3f5e340b4ec7e2a9abe80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 0, y: 1}
-  accelerationForce: 50
-  maxSpeed: 1
+  _direction: {x: 0, y: 1}
+  _accelerationForce: 50
+  _flowSpeed: 1
+  _currentRiverSectionFlowSpeed: {fileID: 11400000, guid: 032029d038a43c24ea0447ead4f9b58d,
+    type: 2}
+  _currentRiverSectionAccelerationForce: {fileID: 11400000, guid: d1ededc41f868ed47be728aae736bbe7,
+    type: 2}
+  _currentRiverSectionDirection: {fileID: 11400000, guid: 42a32891f1feca044a4ee1ed4b12d92c,
+    type: 2}
 --- !u!65 &4440969618078546184
 BoxCollider:
   m_ObjectHideFlags: 0

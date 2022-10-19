@@ -9,9 +9,9 @@ using UnityEditor;
 public class GameplaySettingsEditor : Editor
 {
     // Movement
-    private SerializedProperty _canMoveInAirProperty;
-    private SerializedProperty _moveForceAirborneProperty;
     private SerializedProperty _moveForceGroundedProperty;
+    private SerializedProperty _downstreamMaxSpeedIncreaseProperty;
+    private SerializedProperty _upstreamMaxSpeedProperty;
 
     // Jumping & Gravity
     private SerializedProperty _gravityScaleProperty;
@@ -38,9 +38,9 @@ public class GameplaySettingsEditor : Editor
     private void OnEnable()
     {
         // Movement
-        _canMoveInAirProperty = serializedObject.FindProperty("CanMoveInAir");
-        _moveForceAirborneProperty = serializedObject.FindProperty("MoveForceAirborne");
+        _downstreamMaxSpeedIncreaseProperty = serializedObject.FindProperty("DownstreamMaxSpeedIncrease");
         _moveForceGroundedProperty = serializedObject.FindProperty("MoveForceGrounded");
+        _upstreamMaxSpeedProperty = serializedObject.FindProperty("UpstreamMaxSpeed");
 
         // Jump & Gravity
         _gravityScaleProperty = serializedObject.FindProperty("GravityScale");
@@ -68,12 +68,8 @@ public class GameplaySettingsEditor : Editor
 
         EditorGUILayout.LabelField("Player Movement", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(_moveForceGroundedProperty);
-        EditorGUILayout.PropertyField(_canMoveInAirProperty);
-
-        if (_canMoveInAirProperty.boolValue)
-        {
-            EditorGUILayout.PropertyField(_moveForceAirborneProperty);
-        }
+        EditorGUILayout.PropertyField(_downstreamMaxSpeedIncreaseProperty);
+        EditorGUILayout.PropertyField(_upstreamMaxSpeedProperty);
 
         EditorGUILayout.Space();
 

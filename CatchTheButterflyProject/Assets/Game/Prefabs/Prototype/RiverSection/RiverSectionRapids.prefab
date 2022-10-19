@@ -14,6 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 74776555131260088, guid: 5c224f6c78b5b2a4fbd035999c307e28,
         type: 3}
+      propertyPath: _flowSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 74776555131260088, guid: 5c224f6c78b5b2a4fbd035999c307e28,
+        type: 3}
       propertyPath: accelerationForce
       value: 50
       objectReference: {fileID: 0}
