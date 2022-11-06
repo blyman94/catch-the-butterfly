@@ -14,10 +14,10 @@ public class GameplaySettings : ScriptableObject
     public float CameraShakeIntensity = 2.0f;
 
     /// <summary>
-    /// Can the player adjust its movement in the air?
+    /// How much faster than the river can the player swim?
     /// </summary>
-    [Tooltip("Can the player adjust its movement in the air?")]
-    public bool CanMoveInAir = false;
+    [Tooltip("How much faster than the river can the player swim?")]
+    public float DownstreamMaxSpeedIncrease = 1.0f;
 
     /// <summary>
     /// How long should it take the drown effect to fade in and out?
@@ -49,14 +49,6 @@ public class GameplaySettings : ScriptableObject
 
     /// <summary>
     /// Force applied over time to move the Player along the x axis while 
-    /// airborne.
-    /// </summary>
-    [Tooltip("Force applied over time to move the Player along the " +
-        "x axis while airborne.")]
-    public float MoveForceAirborne = 50.0f;
-
-    /// <summary>
-    /// Force applied over time to move the Player along the x axis while 
     /// grounded.
     /// </summary>
     [Tooltip("Force applied over time to move the Player along the " + 
@@ -74,6 +66,12 @@ public class GameplaySettings : ScriptableObject
     /// </summary>
     [Tooltip("Number of total jumps the Player can execute without grounding.")]
     public int TotalJumpCount = 1;
+
+    /// <summary>
+    /// What is the maximum speed at which the player can swim upstream?
+    /// </summary>
+    [Tooltip("What is the maximum speed at which the player can swim upstream?")]
+    public float UpstreamMaxSpeed = 0.5f;
 
     /// <summary>
     /// Should the camera shake when the drown sequence starts?

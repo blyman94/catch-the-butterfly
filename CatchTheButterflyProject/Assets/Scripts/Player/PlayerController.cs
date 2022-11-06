@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            _playerMover.MoveInput = new Vector2(context.ReadValue<float>(), 0);
+            _playerMover.MoveInput = context.ReadValue<Vector2>();
         }
         else
         {

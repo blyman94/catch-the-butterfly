@@ -14,8 +14,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 74776555131260088, guid: 5c224f6c78b5b2a4fbd035999c307e28,
         type: 3}
+      propertyPath: _flowSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 74776555131260088, guid: 5c224f6c78b5b2a4fbd035999c307e28,
+        type: 3}
       propertyPath: accelerationForce
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 74776555131260088, guid: 5c224f6c78b5b2a4fbd035999c307e28,
+        type: 3}
+      propertyPath: _accelerationForce
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1150835030428204134, guid: 5c224f6c78b5b2a4fbd035999c307e28,
         type: 3}

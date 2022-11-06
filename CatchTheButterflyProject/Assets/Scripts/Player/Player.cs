@@ -9,15 +9,17 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameplaySettings GameplaySettings;
 
-    [Header("Physics Components")]
-    [SerializeField] private Rigidbody Rb;
-    [SerializeField] private Sensor3D GroundSensor;
+    [Header("Data")]
+    [SerializeField] private Vector3Variable _playerPosition;
 
     [Header("Movement Components")]
     public CustomGravity3D CustomGravity;
     public PlayerJumper Jumper;
     public PlayerMover Mover;
 
+    [Header("Physics Components")]
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private Sensor3D _groundSensor;
 
     #region MonoBehaviour Methods
     private void Awake()
@@ -28,13 +30,17 @@ public class Player : MonoBehaviour
         Mover.GameplaySettings = GameplaySettings;
 
         // Assign Rb
-        CustomGravity.Rb = Rb;
-        Jumper.Rb = Rb;
-        Mover.Rb = Rb;
+        CustomGravity.Rb = _rb;
+        Jumper.Rb = _rb;
+        Mover.Rb = _rb;
 
         // Assign GroundSensor
-        Jumper.GroundSensor = GroundSensor;
-        Mover.GroundSensor = GroundSensor;
+        Jumper.GroundSensor = _groundSensor;
+        Mover.GroundSensor = _groundSensor;
+    }
+    private void Update()
+    {
+        _playerPosition.Value = transform.position;
     }
     #endregion
 }
