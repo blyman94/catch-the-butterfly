@@ -44,12 +44,12 @@ Material:
     - _RippleDensity: 4
     - _RippleSlimness: 8
     - _RippleSpeed: 1
-    - _WaterAlpha: 0.19
+    - _WaterAlpha: 0.5
     m_Colors:
     - _BaseColor: {r: 0.23829645, g: 0.6394608, b: 0.99056596, a: 1}
     - _FoamColor: {r: 2, g: 2, b: 2, a: 1}
     - _RippleColor: {r: 0.3921569, g: 0.7686275, b: 2, a: 1}
-    - _Tiling: {r: 4, g: 64, b: 0, a: 0}
+    - _Tiling: {r: 4, g: 16, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8413664715339209382
 MonoBehaviour:
