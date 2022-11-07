@@ -15,7 +15,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2995
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -35,12 +35,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FoamAmount: 0.3
-    - _FoamCutoff: 1.12
+    - _FoamAmount: 0.15
+    - _FoamCutoff: 1.1
     - _FoamScale: 30
     - _FoamSpeed: 0.05
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: -5
     - _RippleDensity: 4
     - _RippleSlimness: 8
     - _RippleSpeed: 1
