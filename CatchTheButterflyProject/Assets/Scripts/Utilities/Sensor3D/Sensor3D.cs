@@ -121,11 +121,11 @@ public class Sensor3D : MonoBehaviour
         {
             case SensorShape.Box:
                 detectedColliders = Physics.OverlapBox(transform.position,
-                    boxSize * 0.5f, Quaternion.identity, layerToSense);
+                    boxSize * 0.5f, Quaternion.identity, layerToSense,QueryTriggerInteraction.Collide);
                 break;
             case SensorShape.Sphere:
                 detectedColliders = Physics.OverlapSphere(transform.position,
-                    radius, layerToSense);
+                    radius, layerToSense,QueryTriggerInteraction.Collide);
                 break;
             default:
                 break;
