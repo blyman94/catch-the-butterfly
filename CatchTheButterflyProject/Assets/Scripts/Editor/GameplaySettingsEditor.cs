@@ -8,6 +8,11 @@ using UnityEditor;
 [CanEditMultipleObjects]
 public class GameplaySettingsEditor : Editor
 {
+    // Audio
+    private SerializedProperty _defaultMusicVolumeProperty;
+    private SerializedProperty _defaultSFXVolumeProperty;
+    private SerializedProperty _defaultVoiceVolumeProperty;
+
     // Movement
     private SerializedProperty _constantMoveSpeedProperty;
     private SerializedProperty _moveForceGroundedProperty;
@@ -39,6 +44,11 @@ public class GameplaySettingsEditor : Editor
     #region Editor Methods
     private void OnEnable()
     {
+        // Audio 
+        _defaultMusicVolumeProperty = serializedObject.FindProperty("DefaultMusicVolume");
+        _defaultSFXVolumeProperty = serializedObject.FindProperty("DefaultSFXVolume");
+        _defaultVoiceVolumeProperty = serializedObject.FindProperty("DefaultVoiceVolume");
+        
         // Movement
         _constantMoveSpeedProperty = serializedObject.FindProperty("ConstantMoveSpeed");
         _downstreamMaxSpeedIncreaseProperty = serializedObject.FindProperty("DownstreamMaxSpeedIncrease");
@@ -126,6 +136,13 @@ public class GameplaySettingsEditor : Editor
             EditorGUILayout.PropertyField(_vignetteIntensityProperty);
         }
 
+        EditorGUILayout.Space();
+        
+        EditorGUILayout.LabelField("Player Movement", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(_defaultMusicVolumeProperty);
+        EditorGUILayout.PropertyField(_defaultSFXVolumeProperty);
+        EditorGUILayout.PropertyField(_defaultVoiceVolumeProperty);
+        
         EditorGUILayout.Space();
 
         showInfo = EditorGUILayout.Foldout(showInfo, "Info");

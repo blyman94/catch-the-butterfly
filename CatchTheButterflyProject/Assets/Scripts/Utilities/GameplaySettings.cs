@@ -18,7 +18,25 @@ public class GameplaySettings : ScriptableObject
     /// </summary>
     [Tooltip("What should the constant move speed of the player be?")]
     public float ConstantMoveSpeed = 1.0f;
-
+    
+    /// <summary>
+    /// Default music volume.
+    /// </summary>
+    [Tooltip("Default music volume.")]
+    public float DefaultMusicVolume = 1.0f;
+    
+    /// <summary>
+    /// Default SFX volume.
+    /// </summary>
+    [Tooltip("Default SFX volume.")]
+    public float DefaultSFXVolume = 1.0f;
+    
+    /// <summary>
+    /// Default Voice volume.
+    /// </summary>
+    [Tooltip("Default Voice volume.")]
+    public float DefaultVoiceVolume = 1.0f;
+    
     /// <summary>
     /// How much faster than the river can the player swim?
     /// </summary>
