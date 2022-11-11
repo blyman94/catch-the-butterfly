@@ -12,6 +12,12 @@ public class GameplaySettings : ScriptableObject
     [Tooltip("How much should the camera shake when a player collides with " + 
         "a rock?")]
     public float CameraShakeIntensity = 2.0f;
+    
+    /// <summary>
+    /// What should the constant move speed of the player be?
+    /// </summary>
+    [Tooltip("What should the constant move speed of the player be?")]
+    public float ConstantMoveSpeed = 1.0f;
 
     /// <summary>
     /// How much faster than the river can the player swim?
@@ -86,7 +92,13 @@ public class GameplaySettings : ScriptableObject
     [Tooltip("Should a the colors fade to black and white when the drown " +
         "sequence starts?")]
     public bool UseColorDesaturation = true;
-
+    
+    /// <summary>
+    /// Should a constant player speed be used?
+    /// </summary>
+    [Tooltip("Should a constant player speed be used?")]
+    public bool UseConstantMoveSpeed = true;
+        
     /// <summary>
     /// Should the player's graphics blink when they hit a rock?
     /// </summary>
