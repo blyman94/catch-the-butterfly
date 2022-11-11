@@ -7,6 +7,7 @@ public class ButterflyAI : MonoBehaviour
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Vector2 _boundaryRange;
     [SerializeField] private float _selectNewOffsetTime = 2.0f;
+    [SerializeField] private float _minHeight = 0.5f;
     [SerializeField] private float _maxHeight = 2.0f;
     [SerializeField] private float _zTargetOffset = 5.0f;
 
@@ -18,10 +19,11 @@ public class ButterflyAI : MonoBehaviour
     #region MonoBehaviour Methods
     private void Start()
     {
+        _newOffsetTimer = _selectNewOffsetTime;
+
+        _navMeshAgent.baseOffset = _minHeight;
         _lastBaseOffset = _navMeshAgent.baseOffset;
         _newBaseOffset = _navMeshAgent.baseOffset;
-        _newOffsetTimer = _selectNewOffsetTime;
-        SelectRandomXOffset();
     }
 
     private void Update()
@@ -62,6 +64,6 @@ public class ButterflyAI : MonoBehaviour
     private void SelectRandomBaseOffset()
     {
         _lastBaseOffset = _newBaseOffset;
-        _newBaseOffset = Random.Range(0, _maxHeight);
+        _newBaseOffset = Random.Range(_minHeight, _maxHeight);
     }
 }

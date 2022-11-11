@@ -44,7 +44,7 @@ Material:
     - _RippleDensity: 4
     - _RippleSlimness: 8
     - _RippleSpeed: 1
-    - _WaterAlpha: 0.8
+    - _WaterAlpha: 0.95
     m_Colors:
     - _BaseColor: {r: 0.12156863, g: 0.5058824, b: 0.7176471, a: 1}
     - _FoamColor: {r: 2, g: 2, b: 2, a: 1}
