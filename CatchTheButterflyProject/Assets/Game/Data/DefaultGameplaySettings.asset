@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraShakeIntensity: 2
   ConstantMoveSpeed: 1
-  DefaultMusicVolume: 0.5
-  DefaultSFXVolume: 0.5
+  DefaultMusicVolume: 0.322954
+  DefaultSFXVolume: 0.2344315
   DefaultVoiceVolume: 1
   DownstreamMaxSpeedIncrease: 0.5
   DrownEffectFadeTime: 1

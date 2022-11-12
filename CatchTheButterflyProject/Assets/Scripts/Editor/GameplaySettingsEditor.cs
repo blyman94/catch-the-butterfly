@@ -138,7 +138,7 @@ public class GameplaySettingsEditor : Editor
 
         EditorGUILayout.Space();
         
-        EditorGUILayout.LabelField("Player Movement", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Audio Defaults", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(_defaultMusicVolumeProperty);
         EditorGUILayout.PropertyField(_defaultSFXVolumeProperty);
         EditorGUILayout.PropertyField(_defaultVoiceVolumeProperty);
