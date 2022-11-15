@@ -15,7 +15,7 @@ TagManager:
   - UI
   - Player
   - Ethereal
-  - NoPostProcessing
+  - BloomOnly
   - Boundary
   - Butterfly
   - RiverForce
