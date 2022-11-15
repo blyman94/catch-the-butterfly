@@ -4461,7 +4461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPosition: {fileID: 11400000, guid: 01c2e8bfa4509b24eacaff55214ccc86, type: 2}
   _navMeshAgent: {fileID: 823965236}
-  _boundaryRange: {x: -3, y: 1.2}
+  _boundaryRange: {x: -3.22, y: 1.7}
   _selectNewOffsetTime: 2
   _minHeight: 0.4
   _maxHeight: 1.25
@@ -10122,8 +10122,41 @@ MonoBehaviour:
   - {fileID: 4270103054333946542, guid: 8082a88f6755cc44587f4b87ae92dd35, type: 3}
   maxZValue: 610
   _rockOffsetZIntervalRange: {x: 3, y: 7}
-  _rockOffsetXRange: {x: -2.5, y: 1.7}
+  _rockOffsetXRange: {x: -3.22, y: 1.85}
   _rockOffsetYRange: {x: -0.324, y: -0.324}
+  _difficultyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1894193285
 PrefabInstance:
   m_ObjectHideFlags: 0

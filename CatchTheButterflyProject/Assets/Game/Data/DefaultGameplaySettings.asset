@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultGameplaySettings
   m_EditorClassIdentifier: 
   CameraShakeIntensity: 2
-  ConstantMoveSpeed: 1
+  ConstantMoveSpeed: 0.98
   DefaultMusicVolume: 0.322954
   DefaultSFXVolume: 0.2344315
   DefaultVoiceVolume: 1

@@ -10,6 +10,7 @@ public class RockSpawner : MonoBehaviour
     [SerializeField] private Vector2 _rockOffsetZIntervalRange = new Vector2(1.0f, 5.0f);
     [SerializeField] private Vector2 _rockOffsetXRange = new Vector2(-2.5f, 1.7f);
     [SerializeField] private Vector2 _rockOffsetYRange = new Vector2(-0.22f, -0.22f);
+    [SerializeField] private AnimationCurve _difficultyCurve;
 
     private float _currentZPos;
     
@@ -38,6 +39,21 @@ public class RockSpawner : MonoBehaviour
             
             // Increment Z
             _currentZPos += Random.Range(_rockOffsetZIntervalRange.x, _rockOffsetZIntervalRange.y);
+            
+            ChangeDifficulty();
         }
+    }
+
+    private void ChangeDifficulty()
+    {
+        // Eval position will be between 0 and 1.
+        float evalPos = _currentZPos / maxZValue;
+        
+        // Eval result will likewise be between 0 and 1.
+        float evalResult = _difficultyCurve.Evaluate(evalPos);
+        
+        // Adjust rock spawning according to curve.
+        _rockOffsetZIntervalRange = new Vector2(_rockOffsetZIntervalRange.x - (evalResult * _rockOffsetZIntervalRange.x),
+            Mathf.Max(_rockOffsetZIntervalRange.y - (evalResult * _rockOffsetZIntervalRange.y), 2));
     }
 }
