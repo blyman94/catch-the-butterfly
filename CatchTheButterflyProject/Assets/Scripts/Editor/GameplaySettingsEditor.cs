@@ -8,10 +8,17 @@ using UnityEditor;
 [CanEditMultipleObjects]
 public class GameplaySettingsEditor : Editor
 {
+    // Audio
+    private SerializedProperty _defaultMusicVolumeProperty;
+    private SerializedProperty _defaultSFXVolumeProperty;
+    private SerializedProperty _defaultVoiceVolumeProperty;
+
     // Movement
+    private SerializedProperty _constantMoveSpeedProperty;
     private SerializedProperty _moveForceGroundedProperty;
     private SerializedProperty _downstreamMaxSpeedIncreaseProperty;
     private SerializedProperty _upstreamMaxSpeedProperty;
+    private SerializedProperty _useConstantMoveSpeed;
 
     // Jumping & Gravity
     private SerializedProperty _gravityScaleProperty;
@@ -37,10 +44,17 @@ public class GameplaySettingsEditor : Editor
     #region Editor Methods
     private void OnEnable()
     {
+        // Audio 
+        _defaultMusicVolumeProperty = serializedObject.FindProperty("DefaultMusicVolume");
+        _defaultSFXVolumeProperty = serializedObject.FindProperty("DefaultSFXVolume");
+        _defaultVoiceVolumeProperty = serializedObject.FindProperty("DefaultVoiceVolume");
+        
         // Movement
+        _constantMoveSpeedProperty = serializedObject.FindProperty("ConstantMoveSpeed");
         _downstreamMaxSpeedIncreaseProperty = serializedObject.FindProperty("DownstreamMaxSpeedIncrease");
         _moveForceGroundedProperty = serializedObject.FindProperty("MoveForceGrounded");
         _upstreamMaxSpeedProperty = serializedObject.FindProperty("UpstreamMaxSpeed");
+        _useConstantMoveSpeed = serializedObject.FindProperty("UseConstantMoveSpeed");
 
         // Jump & Gravity
         _gravityScaleProperty = serializedObject.FindProperty("GravityScale");
@@ -67,9 +81,19 @@ public class GameplaySettingsEditor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Player Movement", EditorStyles.boldLabel);
+        
         EditorGUILayout.PropertyField(_moveForceGroundedProperty);
-        EditorGUILayout.PropertyField(_downstreamMaxSpeedIncreaseProperty);
-        EditorGUILayout.PropertyField(_upstreamMaxSpeedProperty);
+        EditorGUILayout.PropertyField(_useConstantMoveSpeed);
+        
+        if (_useConstantMoveSpeed.boolValue)
+        {
+            EditorGUILayout.PropertyField(_constantMoveSpeedProperty);
+        }
+        else
+        {
+            EditorGUILayout.PropertyField(_downstreamMaxSpeedIncreaseProperty);
+            EditorGUILayout.PropertyField(_upstreamMaxSpeedProperty);
+        }
 
         EditorGUILayout.Space();
 
@@ -112,6 +136,13 @@ public class GameplaySettingsEditor : Editor
             EditorGUILayout.PropertyField(_vignetteIntensityProperty);
         }
 
+        EditorGUILayout.Space();
+        
+        EditorGUILayout.LabelField("Audio Defaults", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(_defaultMusicVolumeProperty);
+        EditorGUILayout.PropertyField(_defaultSFXVolumeProperty);
+        EditorGUILayout.PropertyField(_defaultVoiceVolumeProperty);
+        
         EditorGUILayout.Space();
 
         showInfo = EditorGUILayout.Foldout(showInfo, "Info");

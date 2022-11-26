@@ -15,7 +15,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2995
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -35,21 +35,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FoamAmount: 0.3
-    - _FoamCutoff: 1.12
+    - _FoamAmount: 0.25
+    - _FoamCutoff: 1.1
     - _FoamScale: 30
     - _FoamSpeed: 0.05
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: -5
     - _RippleDensity: 4
     - _RippleSlimness: 8
     - _RippleSpeed: 1
-    - _WaterAlpha: 0.19
+    - _WaterAlpha: 0.95
     m_Colors:
-    - _BaseColor: {r: 0.23829645, g: 0.6394608, b: 0.99056596, a: 1}
+    - _BaseColor: {r: 0.12156863, g: 0.5058824, b: 0.7176471, a: 1}
     - _FoamColor: {r: 2, g: 2, b: 2, a: 1}
     - _RippleColor: {r: 0.3921569, g: 0.7686275, b: 2, a: 1}
-    - _Tiling: {r: 4, g: 64, b: 0, a: 0}
+    - _Tiling: {r: 6, g: 124, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8413664715339209382
 MonoBehaviour:

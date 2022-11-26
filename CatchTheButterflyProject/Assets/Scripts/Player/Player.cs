@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
         Mover.Rb = _rb;
 
         // Assign GroundSensor
+        CustomGravity.GroundSensor = _groundSensor;
         Jumper.GroundSensor = _groundSensor;
         Mover.GroundSensor = _groundSensor;
     }

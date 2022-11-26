@@ -73,43 +73,60 @@ public class PlayerMover : MonoBehaviour
     #region MonoBehaviour Methods
     private void FixedUpdate()
     {
-        float currentVelocity = Rb.velocity.z;
-        Vector3 forceToApply = Vector3.zero;
-        bool isSwimming = false;
+        if (GameplaySettings.UseConstantMoveSpeed)
+        {
+            if (Rb.velocity.z < GameplaySettings.ConstantMoveSpeed)
+            {
+                float newZVel = Mathf.Lerp(Rb.velocity.z, GameplaySettings.ConstantMoveSpeed, 0.1f);
+                Rb.velocity = new Vector3(Rb.velocity.x, Rb.velocity.y, newZVel);
+            }
+        }
+        else
+        {
+            float currentVelocity = Rb.velocity.z;
+            Vector3 forceToApplyLeftRight = Vector3.zero;
+            bool isSwimming = false;
 
-        // Add base force from river
-        Vector2 direction = _currentRiverSectionDirection.Value;
-        forceToApply += new Vector3(direction.x, 0.0f, direction.y) *
-            _currentRiverSectionAccelerationForce.Value * Time.fixedDeltaTime;
+            // Add base force from river
+            Vector2 direction = _currentRiverSectionDirection.Value;
+            forceToApplyLeftRight += new Vector3(direction.x, 0.0f, direction.y) *
+                                     _currentRiverSectionAccelerationForce.Value * Time.fixedDeltaTime;
 
+            // Add force from player movement (left-right)
+            isSwimming = MoveInput.x != 0.0f;
+            forceToApplyLeftRight += new Vector3(0.0f, 0.0f, MoveInput.x) *
+                                     GameplaySettings.MoveForceGrounded * Time.fixedDeltaTime;
+
+            // Determine max speed
+            float maxDownstreamSpeed = isSwimming
+                ? _currentRiverSectionFlowSpeed.Value +
+                  GameplaySettings.DownstreamMaxSpeedIncrease
+                : _currentRiverSectionFlowSpeed.Value;
+
+            // Cap downstream speed
+            if (currentVelocity > maxDownstreamSpeed)
+            {
+                float brakeSpeedDownstream = currentVelocity - maxDownstreamSpeed; // calculate the speed decrease
+                forceToApplyLeftRight += new Vector3(0.0f, 0.0f, -brakeSpeedDownstream);
+            }
+            // Cap upstream speed
+            else if (currentVelocity < -GameplaySettings.UpstreamMaxSpeed)
+            {
+                float brakeSpeedUpstream =
+                    -GameplaySettings.UpstreamMaxSpeed - currentVelocity; // calculate the speed increase
+                forceToApplyLeftRight += new Vector3(0.0f, 0.0f, brakeSpeedUpstream);
+            }
+
+            // Apply final force
+            Rb.AddForce(forceToApplyLeftRight);
+        }
+        
+        Vector3 forceToApplyTopBottom = Vector3.zero;
+        
         // Add force from player movement (top-bottom)
-        forceToApply += new Vector3(-MoveInput.y, 0.0f, 0.0f) *
-            GameplaySettings.MoveForceGrounded * Time.fixedDeltaTime;
-
-        // Add force from player movement (left-right)
-        isSwimming = MoveInput.x != 0.0f;
-        forceToApply += new Vector3(0.0f, 0.0f, MoveInput.x) *
-            GameplaySettings.MoveForceGrounded * Time.fixedDeltaTime;
-
-        // Determine max speed
-        float maxDownstreamSpeed = isSwimming ? _currentRiverSectionFlowSpeed.Value +
-            GameplaySettings.DownstreamMaxSpeedIncrease : _currentRiverSectionFlowSpeed.Value;
-
-        // Cap downstream speed
-        if (currentVelocity > maxDownstreamSpeed)
-        {
-            float brakeSpeedDownstream = currentVelocity - maxDownstreamSpeed;  // calculate the speed decrease
-            forceToApply += new Vector3(0.0f, 0.0f, -brakeSpeedDownstream);
-        }
-        // Cap upstream speed
-        else if (currentVelocity < -GameplaySettings.UpstreamMaxSpeed)
-        {
-            float brakeSpeedUpstream = -GameplaySettings.UpstreamMaxSpeed - currentVelocity;  // calculate the speed increase
-            forceToApply += new Vector3(0.0f, 0.0f, brakeSpeedUpstream);
-        }
-
-        // Apply final force
-        Rb.AddForce(forceToApply);
+        forceToApplyTopBottom += new Vector3(-MoveInput.y, 0.0f, 0.0f) * 
+                                 GameplaySettings.MoveForceGrounded * Time.fixedDeltaTime;
+        Rb.AddForce(forceToApplyTopBottom);
     }
     #endregion
 }

@@ -15,6 +15,11 @@ public class CustomGravity3D : MonoBehaviour
     /// </summary>
     public Rigidbody Rb { get; set; }
 
+    /// <summary>
+    /// Sensor3D determining if the Player object is grounded.
+    /// </summary>
+    public Sensor3D GroundSensor { get; set; }
+
     // Global Gravity doesn't appear in the inspector. Modify it here in the code
     // (or via scripting) to define a different default gravity for all objects.
     public static float globalGravity = -9.81f;
@@ -27,9 +32,19 @@ public class CustomGravity3D : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 gravity = 
+        Vector3 gravity =
             globalGravity * GameplaySettings.GravityScale * Vector3.up;
-        Rb.AddForce(gravity, ForceMode.Acceleration);
+        if (!GroundSensor.Active)
+        {
+            Rb.AddForce(gravity, ForceMode.Acceleration);
+        }
+        else
+        {
+            if (Rb.velocity.y < 0.0f)
+            {   
+                Rb.velocity = new Vector3(Rb.velocity.x, 0.0f, Rb.velocity.z);
+            }
+        }
     }
     #endregion
 }

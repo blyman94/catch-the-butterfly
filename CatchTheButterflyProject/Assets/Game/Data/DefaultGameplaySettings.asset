@@ -13,17 +13,22 @@ MonoBehaviour:
   m_Name: DefaultGameplaySettings
   m_EditorClassIdentifier: 
   CameraShakeIntensity: 2
+  ConstantMoveSpeed: 0.98
+  DefaultMusicVolume: 0.322954
+  DefaultSFXVolume: 0.2344315
+  DefaultVoiceVolume: 1
   DownstreamMaxSpeedIncrease: 0.5
   DrownEffectFadeTime: 1
   GravityScale: 0.25
   GraphicsBlinkCount: 10
   JumpForce: 2
-  MoveForceGrounded: 75
+  MoveForceGrounded: 25
   MultiJump: 0
   TotalJumpCount: 1
   UpstreamMaxSpeed: 0.5
-  UseCameraShake: 0
+  UseCameraShake: 1
   UseColorDesaturation: 1
+  UseConstantMoveSpeed: 1
   UseGraphicsBlink: 1
   UseVignette: 1
-  VignetteIntensity: 0.6
+  VignetteIntensity: 0.4
