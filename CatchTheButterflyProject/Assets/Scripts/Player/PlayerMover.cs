@@ -6,25 +6,43 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     /// <summary>
-    /// FloatVariable representing the flow speed of the river section the player is in.
+    /// How much faster or slower than the river can the player move?
     /// </summary>
-    [Header("River Section Data Storage Variables")]
-    [SerializeField] private FloatVariable _currentRiverSectionFlowSpeed;
-
+    [Header("Tech Debt")] 
+    [Tooltip("How much faster or slower than the river can the player move?")]
+    [SerializeField] private float _playerSpeedDelta = 0.5f;
+    
     /// <summary>
-    /// FloatVariable representing the acceleration force of the river section the player is in.
+    /// Event raised when the player attempts to swim downstream.
     /// </summary>
-    [SerializeField] private FloatVariable _currentRiverSectionAccelerationForce;
-
-    /// <summary>
-    /// Vector2Variable representing the direction of the river section the player is in.
-    /// </summary>
-    [SerializeField] private Vector2Variable _currentRiverSectionDirection;
-
     [Header("Events")]
-    [SerializeField] private GameEvent SwimUpstreamEvent;
-    [SerializeField] private GameEvent SwimNeutralEvent;
-    [SerializeField] private GameEvent SwimDownstreamEvent;
+    [Tooltip("Event raised when the player attempts to swim downstream.")]
+    [SerializeField] private GameEvent _swimDownstreamEvent;
+
+    /// <summary>
+    /// Event raised when the player stops swimming up or downstream.
+    /// </summary>
+    [Tooltip("Event raised when the player stops swimming up or downstream.")]
+    [SerializeField] private GameEvent _swimNeutralEvent;
+    
+    /// <summary>
+    /// Event raised when the player attempts to swim upstream.
+    /// </summary>
+    [Tooltip("Event raised when the player attempts to swim upstream.")]
+    [SerializeField] private GameEvent _swimUpstreamEvent;
+    
+    /// <summary>
+    /// Variable containing the current scroll speed of the river.
+    /// </summary>
+    [Header("River Scroll Speeds")]
+    [Tooltip("Variable containing the base scroll speed of the river.")]
+    [SerializeField] private FloatVariable _baseRiverSpeedVariable;
+    
+    /// <summary>
+    /// Variable containing the current scroll speed of the river.
+    /// </summary>
+    [Tooltip("Variable containing the current scroll speed of the river.")]
+    [SerializeField] private FloatVariable _currentRiverSpeedVariable;
 
     /// <summary>
     /// Settings from which gameplay setting values are read.
@@ -55,77 +73,37 @@ public class PlayerMover : MonoBehaviour
             _moveInput = value;
             if (value.x > 0.0f)
             {
-                SwimDownstreamEvent.Raise();
+                _swimDownstreamEvent.Raise();
+                _currentRiverSpeedVariable.Value += _playerSpeedDelta;
             }
             else if (value.x < 0.0f)
             {
-                SwimUpstreamEvent.Raise();
+                _swimUpstreamEvent.Raise();
+                _currentRiverSpeedVariable.Value -= _playerSpeedDelta;
             }
             else
             {
-                SwimNeutralEvent.Raise();
+                _currentRiverSpeedVariable.Value = _baseRiverSpeedVariable.Value;
+                _swimNeutralEvent.Raise();
             }
         }
     }
-
+    
+    /// <summary>
+    /// Represents the current move input for the Player object.
+    /// </summary>
     private Vector2 _moveInput;
+
+    private float _baseRiverSpeed;
 
     #region MonoBehaviour Methods
     private void FixedUpdate()
     {
-        if (GameplaySettings.UseConstantMoveSpeed)
-        {
-            if (Rb.velocity.z < GameplaySettings.ConstantMoveSpeed)
-            {
-                float newZVel = Mathf.Lerp(Rb.velocity.z, GameplaySettings.ConstantMoveSpeed, 0.1f);
-                Rb.velocity = new Vector3(Rb.velocity.x, Rb.velocity.y, newZVel);
-            }
-        }
-        else
-        {
-            float currentVelocity = Rb.velocity.z;
-            Vector3 forceToApplyLeftRight = Vector3.zero;
-            bool isSwimming = false;
-
-            // Add base force from river
-            Vector2 direction = _currentRiverSectionDirection.Value;
-            forceToApplyLeftRight += new Vector3(direction.x, 0.0f, direction.y) *
-                                     _currentRiverSectionAccelerationForce.Value * Time.fixedDeltaTime;
-
-            // Add force from player movement (left-right)
-            isSwimming = MoveInput.x != 0.0f;
-            forceToApplyLeftRight += new Vector3(0.0f, 0.0f, MoveInput.x) *
-                                     GameplaySettings.MoveForceGrounded * Time.fixedDeltaTime;
-
-            // Determine max speed
-            float maxDownstreamSpeed = isSwimming
-                ? _currentRiverSectionFlowSpeed.Value +
-                  GameplaySettings.DownstreamMaxSpeedIncrease
-                : _currentRiverSectionFlowSpeed.Value;
-
-            // Cap downstream speed
-            if (currentVelocity > maxDownstreamSpeed)
-            {
-                float brakeSpeedDownstream = currentVelocity - maxDownstreamSpeed; // calculate the speed decrease
-                forceToApplyLeftRight += new Vector3(0.0f, 0.0f, -brakeSpeedDownstream);
-            }
-            // Cap upstream speed
-            else if (currentVelocity < -GameplaySettings.UpstreamMaxSpeed)
-            {
-                float brakeSpeedUpstream =
-                    -GameplaySettings.UpstreamMaxSpeed - currentVelocity; // calculate the speed increase
-                forceToApplyLeftRight += new Vector3(0.0f, 0.0f, brakeSpeedUpstream);
-            }
-
-            // Apply final force
-            Rb.AddForce(forceToApplyLeftRight);
-        }
-        
         Vector3 forceToApplyTopBottom = Vector3.zero;
         
         // Add force from player movement (top-bottom)
         forceToApplyTopBottom += new Vector3(-MoveInput.y, 0.0f, 0.0f) * 
-                                 GameplaySettings.MoveForceGrounded * Time.fixedDeltaTime;
+                                 (GameplaySettings.MoveForceGrounded * Time.fixedDeltaTime);
         Rb.AddForce(forceToApplyTopBottom);
     }
     #endregion
