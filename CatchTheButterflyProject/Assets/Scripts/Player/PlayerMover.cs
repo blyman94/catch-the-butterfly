@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// TODO: Lerp speed
+
 /// <summary>
 /// Responsible for moving the player along the x and z axes.
 /// </summary>
@@ -59,6 +61,9 @@ public class PlayerMover : MonoBehaviour
     /// </summary>
     public Sensor3D GroundSensor { get; set; }
 
+    private bool _isSwimmingUpstream = false;
+    private bool _isSwimmingDownstream = false;
+
     /// <summary>
     /// Represents the current move input for the Player object.
     /// </summary>
@@ -73,16 +78,29 @@ public class PlayerMover : MonoBehaviour
             _moveInput = value;
             if (value.x > 0.0f)
             {
-                _swimDownstreamEvent.Raise();
-                _currentRiverSpeedVariable.Value += _playerSpeedDelta;
+                if (!_isSwimmingDownstream)
+                {
+                    _isSwimmingDownstream = true;
+                    _isSwimmingUpstream = false;
+                    _swimDownstreamEvent.Raise();
+                    _currentRiverSpeedVariable.Value += _playerSpeedDelta;
+                }
             }
             else if (value.x < 0.0f)
             {
-                _swimUpstreamEvent.Raise();
-                _currentRiverSpeedVariable.Value -= _playerSpeedDelta;
+                if (!_isSwimmingUpstream)
+                {
+                    _isSwimmingUpstream = true;
+                    _isSwimmingDownstream = false;
+                    _swimUpstreamEvent.Raise();
+                    _currentRiverSpeedVariable.Value -= _playerSpeedDelta;
+                }
             }
             else
             {
+                _isSwimmingUpstream = false;
+                _isSwimmingDownstream = false;
+                
                 _currentRiverSpeedVariable.Value = _baseRiverSpeedVariable.Value;
                 _swimNeutralEvent.Raise();
             }

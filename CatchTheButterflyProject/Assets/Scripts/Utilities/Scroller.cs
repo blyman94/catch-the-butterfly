@@ -9,6 +9,8 @@ public class Scroller : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private FloatVariable _scrollSpeed;
 
+    private bool _override = false;
+
     #region MonoBehaviour Methods
     private void OnEnable()
     {
@@ -24,12 +26,23 @@ public class Scroller : MonoBehaviour
         _scrollSpeed.VariableUpdated -= SetSpeed;
     }
     #endregion
+
+    public void SetSpeedOverride(float newSpeed)
+    {
+        _override = true;
+        _rigidbody.velocity = 
+            new Vector3(_rigidbody.velocity.x, 0.0f, newSpeed);
+    }
     
     /// <summary>
     /// Sets the velocity of the rigidbody to make the section scroll.
     /// </summary>
     private void SetSpeed()
     {
-        _rigidbody.velocity = new Vector3(0.0f, 0.0f, -_scrollSpeed.Value);
+        if (!_override)
+        {
+            _rigidbody.velocity = 
+                new Vector3(_rigidbody.velocity.x, 0.0f, -_scrollSpeed.Value);
+        }
     }
 }

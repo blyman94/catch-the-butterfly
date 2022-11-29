@@ -1,14 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class ButterflyAI : MonoBehaviour
 {
-    [SerializeField] private Vector3Variable _playerPosition;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Animator _animator;
-    [SerializeField] private float _zTargetOffset = 5.0f;
-    [SerializeField] private float _startFlyingDistance = 2.0f;
+    [SerializeField] private Scroller _scroller;
     
+    [Header("Positioning")]
+    [SerializeField] private Vector3Variable _playerPosition;
+    [SerializeField] private float _startFlyingDistance = 2.0f;
+    [SerializeField] private float _speedX;
+
     [Header("Random Ranges")]
     [SerializeField] private Vector2 _boundaryRange;
     [SerializeField] private Vector2 _baseOffsetRange;
@@ -19,27 +24,42 @@ public class ButterflyAI : MonoBehaviour
     [SerializeField] private float _selectNewBaseOffsetTime = 2.0f;
     [SerializeField] private float _selectNewSpeedTime = 2.0f;
 
+    [Header("River Speeds")] 
+    [SerializeField] private FloatVariable _baseRiverSpeed;
+    [SerializeField] private FloatVariable _currentRiverSpeed;
+
     private bool _isWaiting;
     private int _flyTriggerHash;
+    private Vector2 _relativeSpeedRange;
 
     private float _xOffset;
     private float _newBaseOffsetTimer;
     private float _newSpeedTimer;
     private float _lastBaseOffset;
     private float _newBaseOffset;
+    private float _relativeZSpeed;
 
     #region MonoBehaviour Methods
 
     private void Awake()
     {
         _flyTriggerHash = Animator.StringToHash("FlyTrigger");
+        UpdateRelativeSpeedRange();
+    }
+
+    private void OnEnable()
+    {
+        _baseRiverSpeed.VariableUpdated += UpdateRelativeSpeedRange;
     }
     private void Start()
     {
         _isWaiting = true;
         _navMeshAgent.baseOffset = _baseOffsetRange.x;
     }
-
+    private void OnDisable()
+    {
+        _baseRiverSpeed.VariableUpdated -= UpdateRelativeSpeedRange;
+    }
     private void Update()
     {
         if (_isWaiting)
@@ -69,16 +89,15 @@ public class ButterflyAI : MonoBehaviour
                     1- (_newBaseOffsetTimer / _selectNewBaseOffsetTime));
         
             float newPlayerPosX = _playerPosition.Value.x + _xOffset;
-            float newPlayerPosZ = _playerPosition.Value.z + _zTargetOffset;
             _navMeshAgent.SetDestination(new Vector3(newPlayerPosX,
-                _playerPosition.Value.y, newPlayerPosZ));
+                transform.position.y, transform.position.z));
         }
     }
     #endregion
 
     private void StartFlying()
     {
-        _navMeshAgent.speed = _speedRange.x;
+        _navMeshAgent.speed = _speedX;
         
         _newBaseOffsetTimer = _selectNewBaseOffsetTime;
         _lastBaseOffset = _navMeshAgent.baseOffset;
@@ -86,10 +105,16 @@ public class ButterflyAI : MonoBehaviour
 
         InvokeRepeating(nameof(SelectRandomXOffset), 0.0f, 
             _selectNewXOffsetTime);
-        InvokeRepeating(nameof(SelectRandomSpeed), 0.0f, 
+        InvokeRepeating(nameof(SelectRandomRelativeZSpeed), 0.0f, 
             _selectNewSpeedTime);
         
         _animator.SetTrigger(_flyTriggerHash);
+    }
+
+    private void UpdateRelativeSpeedRange()
+    {
+        _relativeSpeedRange = new Vector2(_speedRange.x - _baseRiverSpeed.Value,
+            _speedRange.y - _baseRiverSpeed.Value);
     }
     
     /// <summary>
@@ -105,9 +130,11 @@ public class ButterflyAI : MonoBehaviour
     /// <summary>
     /// Selects a random speed for the butterfly to travel at.
     /// </summary>
-    private void SelectRandomSpeed()
+    private void SelectRandomRelativeZSpeed()
     {
-        _navMeshAgent.speed = Random.Range(_speedRange.x, _speedRange.y);
+        _relativeZSpeed = Random.Range(_relativeSpeedRange.x, _relativeSpeedRange.y) - 
+                          (_currentRiverSpeed.Value - _baseRiverSpeed.Value);
+        _scroller.SetSpeedOverride(_relativeZSpeed);
     }
 
     /// <summary>
