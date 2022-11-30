@@ -1230,18 +1230,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1259006775}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!222 &286589405
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2909,7 +2897,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' Leave Everything'
+  m_text: Family & Responsibility
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6addabc9ee78c34995ae85b97724a95, type: 2}
   m_sharedMaterial: {fileID: 6531808074886637925, guid: a6addabc9ee78c34995ae85b97724a95,
@@ -2937,8 +2925,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.7
-  m_fontSizeBase: 43.7
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4259,7 +4247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1067205100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6523,6 +6511,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplaySettings: {fileID: 11400000, guid: e94dd0e35c3e8ca468505d8d576ad523, type: 2}
   _volume: {fileID: 832575518}
+  _audioMixer: {fileID: 24100000, guid: 314fc5d620dfd004ca39411d8ce6c90f, type: 2}
+  _sfxLowpassCutoffBase: 5000
+  _sfxLowpassCutoffDrown: 1200
+  _musicLowpassCutoffBase: 5000
+  _musicLowpassCutoffDrown: 1200
 --- !u!114 &1411801519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8183,7 +8176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da048f6e6f11654fb10033987224345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _beginPaused: 0
+  _beginPaused: 1
 --- !u!4 &1728370780
 Transform:
   m_ObjectHideFlags: 0

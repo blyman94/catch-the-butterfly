@@ -11,17 +11,7 @@ public class ModuleSequence : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _chapterNameText;
     [SerializeField] private GameEvent _moduleStartEvent;
 
-    private int _moduleIndex = 0;
-    
-    #region MonoBehaviour Methods
-    private void Start()
-    {
-        _voiceoverAudioSource.clip = _modules[0].VoiceoverClip;
-        _voiceoverAudioSource.Play();
-        _chapterNameText.text = _modules[0].ModuleName;
-        _moduleStartEvent.Raise();
-    }
-    #endregion
+    private int _moduleIndex = -1;
 
     public void SpawnRiverSectionResponse()
     {
