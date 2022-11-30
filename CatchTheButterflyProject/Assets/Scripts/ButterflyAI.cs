@@ -54,7 +54,6 @@ public class ButterflyAI : MonoBehaviour
     private void Start()
     {
         _isWaiting = true;
-        _navMeshAgent.baseOffset = _baseOffsetRange.x;
     }
     private void OnDisable()
     {

@@ -56,12 +56,11 @@ MonoBehaviour:
   _animator: {fileID: 3034571366507513279}
   _scroller: {fileID: 6784165867487679655}
   _playerPosition: {fileID: 11400000, guid: 01c2e8bfa4509b24eacaff55214ccc86, type: 2}
-  _zTargetOffset: 1
   _startFlyingDistance: 2
   _speedX: 1.2
   _boundaryRange: {x: -3.05, y: 0.62}
-  _baseOffsetRange: {x: 0.25, y: 1.25}
-  _speedRange: {x: 1, y: 1}
+  _baseOffsetRange: {x: 0.5, y: 1.25}
+  _speedRange: {x: 1.05, y: 1.35}
   _selectNewXOffsetTime: 2
   _selectNewBaseOffsetTime: 0.5
   _selectNewSpeedTime: 1
@@ -100,7 +99,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.25
-  m_BaseOffset: 0
+  m_BaseOffset: 0.37
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!65 &3034571364606838307
