@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5037cfe66b5243145ac18e3b3291d5a2, type: 3}
   m_Name: 01_LeaveEverything
   m_EditorClassIdentifier: 
-  Name: Leave Everything
+  ModuleName: Leave Everything
   VoiceoverClip: {fileID: 8300000, guid: f14222191c870e34ca25dfb5a9a86e09, type: 3}
-  RiverSections: []
+  RiverSectionPrefabs:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}

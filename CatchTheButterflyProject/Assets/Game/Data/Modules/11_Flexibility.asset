@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5037cfe66b5243145ac18e3b3291d5a2, type: 3}
   m_Name: 11_Flexibility
   m_EditorClassIdentifier: 
-  Name: Flexibility
+  ModuleName: Flexibility
   VoiceoverClip: {fileID: 8300000, guid: 259d7f6b458ea464c9c031faa7797893, type: 3}
-  RiverSections: []
+  RiverSectionPrefabs:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5037cfe66b5243145ac18e3b3291d5a2, type: 3}
   m_Name: 02_LanguageBarrier
   m_EditorClassIdentifier: 
-  Name: Language Barrier
+  ModuleName: Language Barrier
   VoiceoverClip: {fileID: 8300000, guid: feba7bde3a7726f4aa25c468c9fdded3, type: 3}
-  RiverSections: []
+  RiverSectionPrefabs:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}

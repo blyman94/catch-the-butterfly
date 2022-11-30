@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5037cfe66b5243145ac18e3b3291d5a2, type: 3}
   m_Name: 07_TheGirl
   m_EditorClassIdentifier: 
-  Name: The Girl
+  ModuleName: The Girl
   VoiceoverClip: {fileID: 8300000, guid: 745bd34e2bfa44e45abc1619fe30d391, type: 3}
-  RiverSections: []
+  RiverSectionPrefabs:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5037cfe66b5243145ac18e3b3291d5a2, type: 3}
   m_Name: 10_GoingBack
   m_EditorClassIdentifier: 
-  Name: Going Back
+  ModuleName: Going Back
   VoiceoverClip: {fileID: 8300000, guid: bdf48c6fa83f5784780d061a7130c7b2, type: 3}
-  RiverSections: []
+  RiverSectionPrefabs:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
