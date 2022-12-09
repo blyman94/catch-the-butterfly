@@ -12,10 +12,16 @@ public class Module : ScriptableObject
 {
     public string ModuleName;
     public AudioClip VoiceoverClip;
-    public GameObject[] RiverSectionPrefabs;
+    public GameObject[] FixedSectionSequence;
+    public GameObject[] RandomSections;
 
     public GameObject GetRandomRiverSectionPrefab()
     {
-        return RiverSectionPrefabs[Random.Range(0, RiverSectionPrefabs.Length)];
+        return RandomSections[Random.Range(0, RandomSections.Length)];
+    }
+
+    public GameObject GetFixedSection(int sectionIndex)
+    {
+        return FixedSectionSequence[sectionIndex];
     }
 }

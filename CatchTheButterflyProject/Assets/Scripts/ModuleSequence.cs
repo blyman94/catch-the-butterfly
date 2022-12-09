@@ -12,6 +12,7 @@ public class ModuleSequence : MonoBehaviour
     [SerializeField] private GameEvent _moduleStartEvent;
 
     private int _moduleIndex = -1;
+    private int _fixedRiverSectionIndex = 0;
 
     public void SpawnRiverSectionResponse()
     {
@@ -22,7 +23,7 @@ public class ModuleSequence : MonoBehaviour
         }
         else
         {
-            SpawnModuleChallengeSection();
+            SpawnModuleSection();
         }
     }
 
@@ -31,9 +32,10 @@ public class ModuleSequence : MonoBehaviour
         if ((_moduleIndex + 1) < _modules.Length)
         {
             _moduleIndex++;
+            _fixedRiverSectionIndex = -1;
             _voiceoverAudioSource.clip = _modules[_moduleIndex].VoiceoverClip;
             _voiceoverAudioSource.Play();
-            SpawnModuleChallengeSection();
+            SpawnModuleSection();
             _chapterNameText.text = _modules[_moduleIndex].ModuleName;
             _moduleStartEvent.Raise();
         }
@@ -43,10 +45,22 @@ public class ModuleSequence : MonoBehaviour
         }
     }
 
-    private void SpawnModuleChallengeSection()
+    private void SpawnModuleSection()
     {
-        GameObject sectionToSpawn =
-            _modules[_moduleIndex].GetRandomRiverSectionPrefab();
+        GameObject sectionToSpawn;
+        if (_fixedRiverSectionIndex + 1 <
+            _modules[_moduleIndex].FixedSectionSequence.Length)
+        {
+            _fixedRiverSectionIndex++;
+            sectionToSpawn = _modules[_moduleIndex]
+                .GetFixedSection(_fixedRiverSectionIndex);
+        }
+        else
+        {
+            sectionToSpawn =
+                _modules[_moduleIndex].GetRandomRiverSectionPrefab();
+        }
+        
         Instantiate(sectionToSpawn, new Vector3(0, 0, 24), Quaternion.identity);
     }
 
