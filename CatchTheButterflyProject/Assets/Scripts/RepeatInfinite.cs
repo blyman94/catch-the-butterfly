@@ -13,7 +13,7 @@ public class RepeatInfinite : MonoBehaviour
     {
         Sprite sprite = _spriteRenderer.sprite;
         Texture2D texture = sprite.texture;
-        _textureUnitSizeZ = texture.height / sprite.pixelsPerUnit;
+        _textureUnitSizeZ = texture.width / sprite.pixelsPerUnit;
     }
 
     private void LateUpdate()
