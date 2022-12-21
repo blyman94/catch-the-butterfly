@@ -13,7 +13,7 @@ public class RockSpawner : MonoBehaviour
     [SerializeField] private AnimationCurve _difficultyCurve;
 
     private float _currentZPos;
-    
+
     #region MonoBehaviour Methods
 
     private void Start()
@@ -31,15 +31,15 @@ public class RockSpawner : MonoBehaviour
             float randomXOffset = Random.Range(_rockOffsetXRange.x, _rockOffsetXRange.y);
             float randomYOffset = Random.Range(_rockOffsetYRange.x, _rockOffsetYRange.y);
             Vector3 newPos = new Vector3(randomXOffset, randomYOffset, _currentZPos);
-            
+
             // Instantiate Rock
             int randomRockIndex = Random.Range(0, _rockPrefabs.Length);
             GameObject rockObject = Instantiate(_rockPrefabs[randomRockIndex],
-                newPos,Quaternion.identity,transform);
-            
+                newPos, Quaternion.identity, transform);
+
             // Increment Z
             _currentZPos += Random.Range(_rockOffsetZIntervalRange.x, _rockOffsetZIntervalRange.y);
-            
+
             ChangeDifficulty();
         }
     }
@@ -48,10 +48,10 @@ public class RockSpawner : MonoBehaviour
     {
         // Eval position will be between 0 and 1.
         float evalPos = _currentZPos / maxZValue;
-        
+
         // Eval result will likewise be between 0 and 1.
         float evalResult = _difficultyCurve.Evaluate(evalPos);
-        
+
         // Adjust rock spawning according to curve.
         _rockOffsetZIntervalRange = new Vector2(_rockOffsetZIntervalRange.x - (evalResult * _rockOffsetZIntervalRange.x),
             Mathf.Max(_rockOffsetZIntervalRange.y - (evalResult * _rockOffsetZIntervalRange.y), 2));

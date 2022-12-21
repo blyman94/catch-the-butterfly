@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+    [SerializeField] private bool _beginPaused = true;
+    
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0.0f;
+        if (_beginPaused)
+        {
+            Time.timeScale = 0.0f;
+        }
     }
 
     public void StartTime()
