@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModuleName: Going Back
   VoiceoverClip: {fileID: 8300000, guid: bdf48c6fa83f5784780d061a7130c7b2, type: 3}
-  RiverSectionPrefabs:
+  FixedSectionSequence:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
+  RandomSections:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}

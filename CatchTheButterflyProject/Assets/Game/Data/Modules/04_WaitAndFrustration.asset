@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModuleName: Wait & Frustration
   VoiceoverClip: {fileID: 8300000, guid: 022c11e2bda7f054fbd3a8a4d096b94c, type: 3}
-  RiverSectionPrefabs:
-  - {fileID: 4746012070286876777, guid: 851da27cd3ed78b4abf226484e65d40f, type: 3}
+  FixedSectionSequence:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
+  RandomSections:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}

@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModuleName: Flexibility
   VoiceoverClip: {fileID: 8300000, guid: 259d7f6b458ea464c9c031faa7797893, type: 3}
-  RiverSectionPrefabs:
+  FixedSectionSequence:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
+  RandomSections:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}

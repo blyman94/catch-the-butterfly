@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModuleName: Family & Responsibility
   VoiceoverClip: {fileID: 8300000, guid: 9119ffa128640c9439c3088d2f369651, type: 3}
-  RiverSectionPrefabs:
+  FixedSectionSequence:
+  - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
+  RandomSections:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
