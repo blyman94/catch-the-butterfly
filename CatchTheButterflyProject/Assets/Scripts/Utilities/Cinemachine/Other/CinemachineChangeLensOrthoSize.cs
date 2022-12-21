@@ -2,6 +2,9 @@ using System.Collections;
 using UnityEngine;
 using Cinemachine;
 
+/// <summary>
+/// Smoothly changes the lens orthographic size to create a nice zoom effect.
+/// </summary>
 public class CinemachineChangeLensOrthoSize : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera _vcam;

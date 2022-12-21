@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ButterflySpawner : MonoBehaviour
 {
-    [SerializeField] private Vector3Variable _playerPosition;
     [SerializeField] private BoolVariable _isDrown;
     [SerializeField] private GameObject _butterflyPrefab;
-    [SerializeField] private List<Transform> _butterflySpawnPositions;
-    [SerializeField] private float _distanceBuffer = 5.5f;
+    [SerializeField] private GameObject _rockPrefab;
+    [SerializeField] private Vector2 _butterflySpawnXPositionRange;
+    [SerializeField] private float _distanceBuffer = 7.7f;
     
     public bool ButterflyActive { get; set; }
     
@@ -33,12 +34,12 @@ public class ButterflySpawner : MonoBehaviour
     {
         if (_isDrown.Value && !ButterflyActive)
         {
-            Transform spawnTransform = _butterflySpawnPositions.Where(x =>
-                x.position.z > _playerPosition.Value.z + 
-                _distanceBuffer).OrderBy(x => x.position.z).ToList()[0];
-            
-            Instantiate(_butterflyPrefab, spawnTransform.position,
-                Quaternion.identity);
+            float xPos = Random.Range(_butterflySpawnXPositionRange.x,
+                _butterflySpawnXPositionRange.y);
+            Vector3 spawnPosRock = new Vector3(xPos, 0.0f, _distanceBuffer);
+            Vector3 spawnPosButterfly = new Vector3(xPos, -0.25f, _distanceBuffer);
+            Instantiate(_rockPrefab, spawnPosRock, Quaternion.identity);
+            Instantiate(_butterflyPrefab, spawnPosButterfly, Quaternion.identity);
             ButterflyActive = true;
         }
     }
