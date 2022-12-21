@@ -12,37 +12,17 @@ public class GraphicsBlinkSequence2D : MonoBehaviour
     private float _effectTimer;
     private float _blinkTimer;
     private float _timeBetweenBlinks;
-    private List<Sprite> _spritesToBlink;
-    private bool _spriteShown = true;
 
     #region MonoBehaviour Methods
-
-    private void Start()
-    {
-        _spritesToBlink = new List<Sprite>();
-        foreach (SpriteRenderer renderer in _spriteRenderersToBlink)
-        {
-            _spritesToBlink.Add(renderer.sprite);
-        }
-    }
     private void Update()
     {
         if (_effectTimer > 0.0f)
         {
             if (_blinkTimer < 0.0f)
             {
-                for(int i = 0; i < _spriteRenderersToBlink.Length; i++)
+                foreach (SpriteRenderer renderer in _spriteRenderersToBlink)
                 {
-                    if (_spriteShown)
-                    {
-                        _spriteShown = false;
-                        _spriteRenderersToBlink[i].sprite = null;
-                    }
-                    else
-                    {
-                        _spriteShown = true;
-                        _spriteRenderersToBlink[i].sprite = _spritesToBlink[i];
-                    }
+                    renderer.gameObject.SetActive(!renderer.gameObject.activeInHierarchy);
                 }
                 _blinkTimer = _timeBetweenBlinks;
             }
@@ -50,10 +30,9 @@ public class GraphicsBlinkSequence2D : MonoBehaviour
             _effectTimer -= Time.deltaTime;
             if (_effectTimer <= 0.0f)
             {
-                for(int i = 0; i < _spriteRenderersToBlink.Length; i++)
+                foreach (SpriteRenderer renderer in _spriteRenderersToBlink)
                 {
-                    _spriteShown = true;
-                    _spriteRenderersToBlink[i].sprite = _spritesToBlink[i];
+                    renderer.gameObject.SetActive(true);
                 }
                 _graphicsBlinkEndEvent?.Raise();
             }
@@ -75,11 +54,10 @@ public class GraphicsBlinkSequence2D : MonoBehaviour
                 (_gameplaySettings.DrownEffectFadeTime /
                  _gameplaySettings.GraphicsBlinkCount) * 0.5f;
             _blinkTimer = _timeBetweenBlinks;
-            
-            for(int i = 0; i < _spriteRenderersToBlink.Length; i++)
+
+            foreach (SpriteRenderer renderer in _spriteRenderersToBlink)
             {
-                _spriteShown = false;
-                _spriteRenderersToBlink[i].sprite = null;
+                renderer.gameObject.SetActive(false);
             }
         }
     }

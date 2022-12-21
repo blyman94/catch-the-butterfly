@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -12,14 +11,6 @@ public class DrownSequence : MonoBehaviour
 {
     [SerializeField] private GameplaySettings gameplaySettings;
     [SerializeField] private Volume _volume;
-    [SerializeField] private AudioMixer _audioMixer;
-
-    [Header("Tech Debt")] 
-    [SerializeField] private float _sfxLowpassCutoffBase = 5000.0f;
-    [SerializeField] private float _sfxLowpassCutoffDrown = 1200.0f;
-    [SerializeField] private float _musicLowpassCutoffBase = 5000.0f;
-    [SerializeField] private float _musicLowpassCutoffDrown = 1200.0f;
-    
     private Vignette _vignette;
     private ColorAdjustments _colorAdjustments;
     private IEnumerator activeCoroutine;
@@ -71,12 +62,6 @@ public class DrownSequence : MonoBehaviour
     private IEnumerator StartDrownSequenceRoutine()
     {
         float elapsedTime = 0.0f;
-        
-        float currentSFXLowpassCutoff;
-        _audioMixer.GetFloat("SFXLowpassCutoff", out currentSFXLowpassCutoff);
-        float currentMusicLowpassCutoff;
-        _audioMixer.GetFloat("MusicLowpassCutoff", out currentMusicLowpassCutoff);
-        
         float currentVignetteIntensity = _vignette.intensity.value;
         float currentColorAdjustmentsSaturation =
             _colorAdjustments.saturation.value;
@@ -96,23 +81,10 @@ public class DrownSequence : MonoBehaviour
                 elapsedTime / gameplaySettings.DrownEffectFadeTime);
             }
             
-            // Lowpass
-            _audioMixer.SetFloat("SFXLowpassCutoff", Mathf.Lerp(
-                currentSFXLowpassCutoff,
-                _sfxLowpassCutoffDrown,
-                elapsedTime / gameplaySettings.DrownEffectFadeTime));
-            _audioMixer.SetFloat("MusicLowpassCutoff", Mathf.Lerp(
-                currentMusicLowpassCutoff,
-                _musicLowpassCutoffDrown,
-                elapsedTime / gameplaySettings.DrownEffectFadeTime));
-            
-            
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        _audioMixer.SetFloat("SFXLowpassCutoff", _sfxLowpassCutoffDrown);
-        _audioMixer.SetFloat("MusicLowpassCutoff", _musicLowpassCutoffDrown);
         _vignette.intensity.value = gameplaySettings.VignetteIntensity;
         _colorAdjustments.saturation.value = -100.0f;
     }
@@ -127,12 +99,6 @@ public class DrownSequence : MonoBehaviour
     private IEnumerator EndDrownSequenceRoutine()
     {
         float elapsedTime = 0.0f;
-        
-        float currentSFXLowpassCutoff;
-        _audioMixer.GetFloat("SFXLowpassCutoff", out currentSFXLowpassCutoff);
-        float currentMusicLowpassCutoff;
-        _audioMixer.GetFloat("MusicLowpassCutoff", out currentMusicLowpassCutoff);
-        
         float currentVignetteIntensity = _vignette.intensity.value;
         float currentColorAdjustmentsSaturation =
             _colorAdjustments.saturation.value;
@@ -144,23 +110,10 @@ public class DrownSequence : MonoBehaviour
             _colorAdjustments.saturation.value =
                 Mathf.Lerp(currentColorAdjustmentsSaturation, 0.0f,
                 elapsedTime / gameplaySettings.DrownEffectFadeTime);
-            
-            // Lowpass
-            _audioMixer.SetFloat("SFXLowpassCutoff", Mathf.Lerp(
-                currentSFXLowpassCutoff,
-                _sfxLowpassCutoffBase,
-                elapsedTime / gameplaySettings.DrownEffectFadeTime));
-            _audioMixer.SetFloat("MusicLowpassCutoff", Mathf.Lerp(
-                currentMusicLowpassCutoff,
-                _musicLowpassCutoffBase,
-                elapsedTime / gameplaySettings.DrownEffectFadeTime));
-            
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
-        _audioMixer.SetFloat("SFXLowpassCutoff", _sfxLowpassCutoffBase);
-        _audioMixer.SetFloat("MusicLowpassCutoff", _musicLowpassCutoffBase);
+
         _vignette.intensity.value = 0.0f;
         _colorAdjustments.saturation.value = 0.0f;
     }

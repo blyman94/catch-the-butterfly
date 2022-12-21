@@ -8,8 +8,6 @@ public class CanvasGroupFade : MonoBehaviour
     [SerializeField] private Vector2 _alphaRange = new Vector2(0.0f, 1.0f);
     [SerializeField] private bool _shownBlocksRaycast = true;
     [SerializeField] private bool _shownInteractable = true;
-    [SerializeField] private GameEvent _fadeInFinishedEvent;
-    [SerializeField] private GameEvent _fadeOutFinishedEvent;
     
     private float _fadeTimer;
     private float _fadeTime;
@@ -63,7 +61,6 @@ public class CanvasGroupFade : MonoBehaviour
             _group.alpha = _alphaRange.x;
             _group.blocksRaycasts = false;
             _group.interactable = false;
-            _fadeOutFinishedEvent?.Raise();
         }
     }
     
@@ -75,8 +72,7 @@ public class CanvasGroupFade : MonoBehaviour
         {
             _group.alpha = _alphaRange.y;
             _group.blocksRaycasts = _shownBlocksRaycast;
-            _group.interactable = _shownInteractable;            
-            _fadeInFinishedEvent?.Raise();
+            _group.interactable = _shownInteractable;
         }
     }
 }
