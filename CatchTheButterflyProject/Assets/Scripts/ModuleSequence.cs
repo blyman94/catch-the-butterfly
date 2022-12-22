@@ -5,6 +5,7 @@ public class ModuleSequence : MonoBehaviour
 {
     [SerializeField] private GameplaySettings _gameplaySettings;
     [SerializeField] private AudioSource _voiceoverAudioSource;
+    [SerializeField] private AudioFader _voiceoverAudioFader;
     [SerializeField] private Module[] _modules;
     [SerializeField] private GameObject _gameEndSectionPrefab;
     [SerializeField] private TextMeshProUGUI _chapterNameText;
@@ -15,6 +16,11 @@ public class ModuleSequence : MonoBehaviour
     private int _fixedRiverSectionIndex = 0;
 
     public void PauseVoiceOverPlayback()
+    {
+        _voiceoverAudioFader.FadeOut(_gameplaySettings.AudioFadeTime, true);
+    }
+
+    public void PlayVoiceOverPlayback()
     {
         if (_gameplaySettings.RewindAudio)
         {
@@ -28,12 +34,7 @@ public class ModuleSequence : MonoBehaviour
             }
         }
 
-        _voiceoverAudioSource.Pause();
-    }
-
-    public void PlayVoiceOverPlayback()
-    {
-        _voiceoverAudioSource.UnPause();
+        _voiceoverAudioFader.FadeIn(_gameplaySettings.AudioFadeTime, true);
     }
 
     public void SpawnRiverSectionResponse()

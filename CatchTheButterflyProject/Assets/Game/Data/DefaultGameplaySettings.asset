@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69149293e604b194f854ba3575928650, type: 3}
   m_Name: DefaultGameplaySettings
   m_EditorClassIdentifier: 
+  AudioFadeTime: 1
   CameraShakeIntensity: 2
   ConstantMoveSpeed: 0.98
   DefaultMusicVolume: 0.322954
@@ -25,6 +26,8 @@ MonoBehaviour:
   MoveForceGrounded: 25
   MultiJump: 0
   OnlyJumpWhenDrowning: 1
+  RewindAudio: 1
+  RewindLength: 1.5
   TotalJumpCount: 1
   UpstreamMaxSpeed: 0.5
   UseCameraShake: 1
