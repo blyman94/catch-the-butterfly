@@ -12,6 +12,8 @@ public class GameplaySettingsEditor : Editor
     private SerializedProperty _defaultMusicVolumeProperty;
     private SerializedProperty _defaultSFXVolumeProperty;
     private SerializedProperty _defaultVoiceVolumeProperty;
+    private SerializedProperty _rewindAudioProperty;
+    private SerializedProperty _rewindLengthProperty;
 
     // Movement
     private SerializedProperty _constantMoveSpeedProperty;
@@ -49,7 +51,9 @@ public class GameplaySettingsEditor : Editor
         _defaultMusicVolumeProperty = serializedObject.FindProperty("DefaultMusicVolume");
         _defaultSFXVolumeProperty = serializedObject.FindProperty("DefaultSFXVolume");
         _defaultVoiceVolumeProperty = serializedObject.FindProperty("DefaultVoiceVolume");
-        
+        _rewindAudioProperty = serializedObject.FindProperty("RewindAudio");
+        _rewindLengthProperty = serializedObject.FindProperty("RewindLength");
+
         // Movement
         _constantMoveSpeedProperty = serializedObject.FindProperty("ConstantMoveSpeed");
         _downstreamMaxSpeedIncreaseProperty = serializedObject.FindProperty("DownstreamMaxSpeedIncrease");
@@ -146,6 +150,15 @@ public class GameplaySettingsEditor : Editor
         EditorGUILayout.PropertyField(_defaultSFXVolumeProperty);
         EditorGUILayout.PropertyField(_defaultVoiceVolumeProperty);
         
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField("Audio Defaults", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(_rewindAudioProperty);
+        if (_rewindAudioProperty.boolValue)
+        {
+            EditorGUILayout.PropertyField(_rewindLengthProperty);
+        }
+
         EditorGUILayout.Space();
 
         showInfo = EditorGUILayout.Foldout(showInfo, "Info");

@@ -92,6 +92,18 @@ public class GameplaySettings : ScriptableObject
     public bool OnlyJumpWhenDrowning = false;
 
     /// <summary>
+    /// When the player hits a rock, should the audio rewind?
+    /// </summary>
+    [Tooltip("When the player hits a rock, should the audio rewind?")]
+    public bool RewindAudio = false;
+
+    /// <summary>
+    /// How far back should the voiceover audio rewind?
+    /// </summary>
+    [Tooltip("How far back should the voiceover audio rewind?")]
+    public float RewindLength = 1.0f;
+
+    /// <summary>
     /// Number of total jumps the Player can execute without grounding.
     /// </summary>
     [Tooltip("Number of total jumps the Player can execute without grounding.")]

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     [Header("Data")]
     [SerializeField] private Vector3Variable _playerPosition;
+    [SerializeField] private BoolVariable _isDrown;
 
     [Header("Movement Components")]
     public CustomGravity3D CustomGravity;
@@ -38,6 +39,10 @@ public class Player : MonoBehaviour
         CustomGravity.GroundSensor = _groundSensor;
         Jumper.GroundSensor = _groundSensor;
         Mover.GroundSensor = _groundSensor;
+    }
+    private void Start()
+    {
+        _isDrown.Value = false;
     }
     private void Update()
     {

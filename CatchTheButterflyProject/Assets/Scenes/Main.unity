@@ -2715,6 +2715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameplaySettings: {fileID: 11400000, guid: e94dd0e35c3e8ca468505d8d576ad523, type: 2}
   _playerPosition: {fileID: 11400000, guid: 01c2e8bfa4509b24eacaff55214ccc86, type: 2}
+  _isDrown: {fileID: 11400000, guid: a48e684ac37b45a42912304bac9c5a43, type: 2}
   CustomGravity: {fileID: 918610642}
   Jumper: {fileID: 1439944866}
   Mover: {fileID: 267754236}
@@ -5805,8 +5806,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1259006776}
   - component: {fileID: 1259006775}
-  - component: {fileID: 1259006778}
-  - component: {fileID: 1259006777}
   m_Layer: 0
   m_Name: VoiceOverAudioSource
   m_TagString: Untagged
@@ -5926,62 +5925,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1259006777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1259006774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 080641a3d33d28549b855753c00d51b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 90ce67a752a69ef49b8e992afae89cdb, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1259006775}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: UnPause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1259006778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1259006774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 080641a3d33d28549b855753c00d51b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: caf31a8f8bc4e664b99e7bec80437a99, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1259006775}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Pause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1278132966
 GameObject:
   m_ObjectHideFlags: 0
@@ -7283,6 +7226,8 @@ GameObject:
   - component: {fileID: 1489666487}
   - component: {fileID: 1489666486}
   - component: {fileID: 1489666485}
+  - component: {fileID: 1489666489}
+  - component: {fileID: 1489666488}
   m_Layer: 0
   m_Name: ModuleSequence
   m_TagString: Untagged
@@ -7330,6 +7275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2fce1452bcf3f9428bc486b0a5f2abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameplaySettings: {fileID: 11400000, guid: e94dd0e35c3e8ca468505d8d576ad523, type: 2}
   _voiceoverAudioSource: {fileID: 1259006775}
   _modules:
   - {fileID: 11400000, guid: 5c47953b6b18c3746bcfba7db8956c84, type: 2}
@@ -7348,6 +7294,7 @@ MonoBehaviour:
     type: 3}
   _chapterNameText: {fileID: 611364593}
   _moduleStartEvent: {fileID: 11400000, guid: 76eac650db0db8744b2d8787a5ac25ef, type: 2}
+  _isDrown: {fileID: 11400000, guid: a48e684ac37b45a42912304bac9c5a43, type: 2}
 --- !u!4 &1489666487
 Transform:
   m_ObjectHideFlags: 0
@@ -7363,6 +7310,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1489666488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489666484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080641a3d33d28549b855753c00d51b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 90ce67a752a69ef49b8e992afae89cdb, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1489666486}
+        m_TargetAssemblyTypeName: ModuleSequence, Assembly-CSharp
+        m_MethodName: PlayVoiceOverPlayback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1489666489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489666484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080641a3d33d28549b855753c00d51b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: caf31a8f8bc4e664b99e7bec80437a99, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1489666486}
+        m_TargetAssemblyTypeName: ModuleSequence, Assembly-CSharp
+        m_MethodName: PauseVoiceOverPlayback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1509831624
 GameObject:
   m_ObjectHideFlags: 0
