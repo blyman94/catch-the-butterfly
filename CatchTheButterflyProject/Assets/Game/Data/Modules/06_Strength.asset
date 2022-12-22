@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: 06_Strength
   m_EditorClassIdentifier: 
   ModuleName: Strength
-  VoiceoverClip: {fileID: 8300000, guid: fcaaa4647d078574cb7a2a744d6f85d8, type: 3}
+  VoiceoverClips:
+  - {fileID: 8300000, guid: fcaaa4647d078574cb7a2a744d6f85d8, type: 3}
   FixedSectionSequence:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
   RandomSections:

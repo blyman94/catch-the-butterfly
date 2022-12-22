@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: 12_CatchTheButterfly
   m_EditorClassIdentifier: 
   ModuleName: Catch The Butterfly
-  VoiceoverClip: {fileID: 8300000, guid: 55376e3fe97c590478105ee4af6592e0, type: 3}
+  VoiceoverClips:
+  - {fileID: 8300000, guid: 55376e3fe97c590478105ee4af6592e0, type: 3}
   FixedSectionSequence:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
   RandomSections:

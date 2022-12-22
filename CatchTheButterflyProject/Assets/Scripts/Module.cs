@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 public class Module : ScriptableObject
 {
     public string ModuleName;
-    public AudioClip VoiceoverClip;
+    public AudioClip[] VoiceoverClips;
     public GameObject[] FixedSectionSequence;
     public GameObject[] RandomSections;
 

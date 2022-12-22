@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: 07_TheGirl
   m_EditorClassIdentifier: 
   ModuleName: The Girl
-  VoiceoverClip: {fileID: 8300000, guid: 745bd34e2bfa44e45abc1619fe30d391, type: 3}
+  VoiceoverClips:
+  - {fileID: 8300000, guid: 745bd34e2bfa44e45abc1619fe30d391, type: 3}
+  - {fileID: 8300000, guid: 21d5411b6c30a4549b05f7dc1d70b8d6, type: 3}
   FixedSectionSequence:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
   RandomSections:

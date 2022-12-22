@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: 01_LeaveEverything
   m_EditorClassIdentifier: 
   ModuleName: Leave Everything
-  VoiceoverClip: {fileID: 8300000, guid: f14222191c870e34ca25dfb5a9a86e09, type: 3}
+  VoiceoverClips:
+  - {fileID: 8300000, guid: f14222191c870e34ca25dfb5a9a86e09, type: 3}
+  - {fileID: 8300000, guid: f243000f9e58cf241985aafe2e1a9518, type: 3}
+  - {fileID: 8300000, guid: da63cbf4ca806b947ae3f52048481b57, type: 3}
   FixedSectionSequence:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
   RandomSections:

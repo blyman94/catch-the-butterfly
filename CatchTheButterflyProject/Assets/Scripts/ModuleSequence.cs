@@ -13,6 +13,7 @@ public class ModuleSequence : MonoBehaviour
     [SerializeField] private BoolVariable _isDrown;
 
     private int _moduleIndex = -1;
+    private int _clipIndex = -1;
     private int _fixedRiverSectionIndex = 0;
 
     public void PauseVoiceOverPlayback()
@@ -42,6 +43,16 @@ public class ModuleSequence : MonoBehaviour
         if (_voiceoverAudioSource.time >= _voiceoverAudioSource.clip.length ||
             _voiceoverAudioSource.time == 0.0f)
         {
+
+            if (_moduleIndex != -1 && (_clipIndex + 1) < _modules[_moduleIndex].VoiceoverClips.Length)
+            {
+                _clipIndex++;
+                _voiceoverAudioSource.clip = _modules[_moduleIndex].VoiceoverClips[_clipIndex];
+                _voiceoverAudioSource.Play();
+                SpawnModuleSection();
+                return;
+            }
+
             MoveToNextModule();
         }
         else
@@ -65,8 +76,9 @@ public class ModuleSequence : MonoBehaviour
         }
 
         _moduleIndex++;
+        _clipIndex = 0;
         _fixedRiverSectionIndex = -1;
-        _voiceoverAudioSource.clip = _modules[_moduleIndex].VoiceoverClip;
+        _voiceoverAudioSource.clip = _modules[_moduleIndex].VoiceoverClips[_clipIndex];
         _voiceoverAudioSource.Play();
         SpawnModuleSection();
         _chapterNameText.text = _modules[_moduleIndex].ModuleName;

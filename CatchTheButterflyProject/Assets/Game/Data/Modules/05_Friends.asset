@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: 05_Friends
   m_EditorClassIdentifier: 
   ModuleName: Friends
-  VoiceoverClip: {fileID: 8300000, guid: e64406710b230d349895c012dbc515c4, type: 3}
+  VoiceoverClips:
+  - {fileID: 8300000, guid: e64406710b230d349895c012dbc515c4, type: 3}
+  - {fileID: 8300000, guid: 0e95a000213065d46a55df4f13904249, type: 3}
   FixedSectionSequence:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
   RandomSections:
