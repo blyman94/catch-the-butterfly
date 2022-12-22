@@ -15,6 +15,7 @@ MonoBehaviour:
   ModuleName: Strength
   VoiceoverClips:
   - {fileID: 8300000, guid: fcaaa4647d078574cb7a2a744d6f85d8, type: 3}
+  - {fileID: 8300000, guid: 2a9e34068bad04c459b95b49b90d0980, type: 3}
   FixedSectionSequence:
   - {fileID: 6810855473344438052, guid: b613485011eed304e9efb016699d999e, type: 3}
   RandomSections:

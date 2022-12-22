@@ -2514,6 +2514,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 473824806}
   _scrollSpeed: {fileID: 11400000, guid: b9dd0f04193fbaf4d8a6bb572f9cb7c3, type: 2}
+  useConstant: 0
+  _scrollSpeedConstant: 1
 --- !u!1 &550210806
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,6 +3957,7 @@ MonoBehaviour:
     type: 2}
   _graphicsBlinkStartEvent: {fileID: 11400000, guid: 1ed6fa4bde1eb3344a874a31d09faabd,
     type: 2}
+  _hiddenOnStart: 0
 --- !u!114 &891421540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5275,6 +5278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1141161138}
   _scrollSpeed: {fileID: 11400000, guid: b9dd0f04193fbaf4d8a6bb572f9cb7c3, type: 2}
+  useConstant: 0
+  _scrollSpeedConstant: 1
 --- !u!4 &1141161140
 Transform:
   m_ObjectHideFlags: 0
