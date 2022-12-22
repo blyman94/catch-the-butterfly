@@ -86,6 +86,12 @@ public class GameplaySettings : ScriptableObject
     public bool MultiJump = false;
 
     /// <summary>
+    /// Can the player only jump when in the drowning state?
+    /// </summary>
+    [Tooltip("Can the player only jump when in the drowning state?")]
+    public bool OnlyJumpWhenDrowning = false;
+
+    /// <summary>
     /// Number of total jumps the Player can execute without grounding.
     /// </summary>
     [Tooltip("Number of total jumps the Player can execute without grounding.")]

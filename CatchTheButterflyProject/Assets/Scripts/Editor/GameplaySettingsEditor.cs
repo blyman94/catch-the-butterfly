@@ -25,6 +25,7 @@ public class GameplaySettingsEditor : Editor
     private SerializedProperty _jumpFroceProperty;
     private SerializedProperty _multiJumpProperty;
     private SerializedProperty _totalJumpCountProperty;
+    private SerializedProperty _onlyJumpWhenDrowningProperty;
 
     // Drown Effect
     private SerializedProperty _cameraShakeIntensity;
@@ -61,6 +62,7 @@ public class GameplaySettingsEditor : Editor
         _jumpFroceProperty = serializedObject.FindProperty("JumpForce");
         _multiJumpProperty = serializedObject.FindProperty("MultiJump");
         _totalJumpCountProperty = serializedObject.FindProperty("TotalJumpCount");
+        _onlyJumpWhenDrowningProperty = serializedObject.FindProperty("OnlyJumpWhenDrowning");
 
         // Drown Effect
         _cameraShakeIntensity = serializedObject.FindProperty("CameraShakeIntensity");
@@ -100,6 +102,7 @@ public class GameplaySettingsEditor : Editor
         EditorGUILayout.LabelField("Player Jumping & Gravity", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(_jumpFroceProperty);
         EditorGUILayout.PropertyField(_gravityScaleProperty);
+        EditorGUILayout.PropertyField(_onlyJumpWhenDrowningProperty);
         EditorGUILayout.PropertyField(_multiJumpProperty);
 
         if (_multiJumpProperty.boolValue)

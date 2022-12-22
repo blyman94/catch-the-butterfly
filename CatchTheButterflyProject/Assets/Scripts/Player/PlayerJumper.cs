@@ -6,6 +6,11 @@ using UnityEngine;
 public class PlayerJumper : MonoBehaviour
 {
     /// <summary>
+    /// Determines whether the player is currently in the drown state.
+    /// </summary>
+    [SerializeField] private BoolVariable _isDrown;
+
+    /// <summary>
     /// Settings from which gameplay setting values are read.
     /// </summary>
     public GameplaySettings GameplaySettings { get; set; }
@@ -45,6 +50,14 @@ public class PlayerJumper : MonoBehaviour
     /// </summary>
     public void Jump()
     {
+        if (GameplaySettings.OnlyJumpWhenDrowning)
+        {
+            if(!_isDrown.Value)
+            {
+                return;
+            }
+        }
+        
         if (GroundSensor.Active || numJumpsCurrent > 0)
         {
             GroundSensor.DisabledTimer = 0.1f;

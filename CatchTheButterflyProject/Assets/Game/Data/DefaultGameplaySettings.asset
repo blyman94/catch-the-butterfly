@@ -24,6 +24,7 @@ MonoBehaviour:
   JumpForce: 2
   MoveForceGrounded: 25
   MultiJump: 0
+  OnlyJumpWhenDrowning: 1
   TotalJumpCount: 1
   UpstreamMaxSpeed: 0.5
   UseCameraShake: 1
