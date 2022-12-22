@@ -8,6 +8,8 @@ public class Scroller : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private FloatVariable _scrollSpeed;
+    [SerializeField] private bool useConstant = false;
+    [SerializeField] private float _scrollSpeedConstant = 1.0f;
 
     private bool _override = false;
 
@@ -31,7 +33,7 @@ public class Scroller : MonoBehaviour
     {
         _override = true;
         _rigidbody.velocity = 
-            new Vector3(_rigidbody.velocity.x, 0.0f, newSpeed);
+            new Vector3(_rigidbody.velocity.x, 0.0f, -newSpeed);
     }
     
     /// <summary>
@@ -41,8 +43,9 @@ public class Scroller : MonoBehaviour
     {
         if (!_override)
         {
+            float newSpeed = useConstant ? _scrollSpeedConstant : _scrollSpeed.Value;
             _rigidbody.velocity = 
-                new Vector3(_rigidbody.velocity.x, 0.0f, -_scrollSpeed.Value);
+                new Vector3(_rigidbody.velocity.x, 0.0f, -newSpeed);
         }
     }
 }

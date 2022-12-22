@@ -8,6 +8,7 @@ public class GraphicsBlinkSequence2D : MonoBehaviour
     [SerializeField] private SpriteRenderer[] _spriteRenderersToBlink;
     [SerializeField] private GameEvent _graphicsBlinkEndEvent;
     [SerializeField] private GameEvent _graphicsBlinkStartEvent;
+    [SerializeField] private bool _hiddenOnStart = false;
 
     private float _effectTimer;
     private float _blinkTimer;
@@ -24,6 +25,14 @@ public class GraphicsBlinkSequence2D : MonoBehaviour
         {
             _spritesToBlink.Add(renderer.sprite);
         }
+
+        if (_hiddenOnStart)
+        {
+            foreach (SpriteRenderer renderer in _spriteRenderersToBlink)
+            {
+                renderer.sprite = null;
+            }
+        }
     }
     private void Update()
     {
@@ -31,7 +40,7 @@ public class GraphicsBlinkSequence2D : MonoBehaviour
         {
             if (_blinkTimer < 0.0f)
             {
-                for(int i = 0; i < _spriteRenderersToBlink.Length; i++)
+                for (int i = 0; i < _spriteRenderersToBlink.Length; i++)
                 {
                     if (_spriteShown)
                     {
@@ -50,7 +59,7 @@ public class GraphicsBlinkSequence2D : MonoBehaviour
             _effectTimer -= Time.deltaTime;
             if (_effectTimer <= 0.0f)
             {
-                for(int i = 0; i < _spriteRenderersToBlink.Length; i++)
+                for (int i = 0; i < _spriteRenderersToBlink.Length; i++)
                 {
                     _spriteShown = true;
                     _spriteRenderersToBlink[i].sprite = _spritesToBlink[i];
@@ -75,8 +84,8 @@ public class GraphicsBlinkSequence2D : MonoBehaviour
                 (_gameplaySettings.DrownEffectFadeTime /
                  _gameplaySettings.GraphicsBlinkCount) * 0.5f;
             _blinkTimer = _timeBetweenBlinks;
-            
-            for(int i = 0; i < _spriteRenderersToBlink.Length; i++)
+
+            for (int i = 0; i < _spriteRenderersToBlink.Length; i++)
             {
                 _spriteShown = false;
                 _spriteRenderersToBlink[i].sprite = null;
