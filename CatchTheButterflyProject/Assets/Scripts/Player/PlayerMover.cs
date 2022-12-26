@@ -8,13 +8,6 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     /// <summary>
-    /// How much faster or slower than the river can the player move?
-    /// </summary>
-    [Header("Tech Debt")] 
-    [Tooltip("How much faster or slower than the river can the player move?")]
-    [SerializeField] private float _playerSpeedDelta = 0.5f;
-    
-    /// <summary>
     /// Event raised when the player attempts to swim downstream.
     /// </summary>
     [Header("Events")]
@@ -26,20 +19,13 @@ public class PlayerMover : MonoBehaviour
     /// </summary>
     [Tooltip("Event raised when the player stops swimming up or downstream.")]
     [SerializeField] private GameEvent _swimNeutralEvent;
-    
+
     /// <summary>
     /// Event raised when the player attempts to swim upstream.
     /// </summary>
     [Tooltip("Event raised when the player attempts to swim upstream.")]
     [SerializeField] private GameEvent _swimUpstreamEvent;
-    
-    /// <summary>
-    /// Variable containing the current scroll speed of the river.
-    /// </summary>
-    [Header("River Scroll Speeds")]
-    [Tooltip("Variable containing the base scroll speed of the river.")]
-    [SerializeField] private FloatVariable _baseRiverSpeedVariable;
-    
+
     /// <summary>
     /// Variable containing the current scroll speed of the river.
     /// </summary>
@@ -83,7 +69,7 @@ public class PlayerMover : MonoBehaviour
                     _isSwimmingDownstream = true;
                     _isSwimmingUpstream = false;
                     _swimDownstreamEvent.Raise();
-                    _currentRiverSpeedVariable.Value += _playerSpeedDelta;
+                    _currentRiverSpeedVariable.Value += GameplaySettings.PlayerSpeedDelta;
                 }
             }
             else if (value.x < 0.0f)
@@ -93,34 +79,36 @@ public class PlayerMover : MonoBehaviour
                     _isSwimmingUpstream = true;
                     _isSwimmingDownstream = false;
                     _swimUpstreamEvent.Raise();
-                    _currentRiverSpeedVariable.Value -= _playerSpeedDelta;
+                    _currentRiverSpeedVariable.Value -= GameplaySettings.PlayerSpeedDelta;
                 }
             }
             else
             {
                 _isSwimmingUpstream = false;
                 _isSwimmingDownstream = false;
-                
-                _currentRiverSpeedVariable.Value = _baseRiverSpeedVariable.Value;
+
+                _currentRiverSpeedVariable.Value = GameplaySettings.PlayerBaseSpeed;
                 _swimNeutralEvent.Raise();
             }
         }
     }
-    
+
     /// <summary>
     /// Represents the current move input for the Player object.
     /// </summary>
     private Vector2 _moveInput;
 
-    private float _baseRiverSpeed;
-
     #region MonoBehaviour Methods
+    private void Start()
+    {
+        _currentRiverSpeedVariable.Value = GameplaySettings.PlayerBaseSpeed;
+    }
     private void FixedUpdate()
     {
         Vector3 forceToApplyTopBottom = Vector3.zero;
-        
+
         // Add force from player movement (top-bottom)
-        forceToApplyTopBottom += new Vector3(-MoveInput.y, 0.0f, 0.0f) * 
+        forceToApplyTopBottom += new Vector3(-MoveInput.y, 0.0f, 0.0f) *
                                  (GameplaySettings.MoveForceGrounded * Time.fixedDeltaTime);
         Rb.AddForce(forceToApplyTopBottom);
     }

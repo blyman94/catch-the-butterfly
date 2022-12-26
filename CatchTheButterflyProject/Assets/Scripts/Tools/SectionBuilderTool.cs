@@ -6,6 +6,8 @@ using UnityEditor;
 
 public class SectionBuilderTool : MonoBehaviour
 {
+    [SerializeField] private GameplaySettings _gameplaySettings;
+    [SerializeField] private AudioClip _sectionAudioClip;
     [SerializeField] private Transform _rockObstacleParent;
     [SerializeField] private string _dataStoragePath = "Assets/Game/Data/RiverSectionData/";
 
@@ -22,6 +24,7 @@ public class SectionBuilderTool : MonoBehaviour
     {
         DrawLineGuides();
         DrawPlayerStartPositionGuide();
+        DrawPlayerEndPositionGuide();
     }
     #endregion
 
@@ -62,6 +65,42 @@ public class SectionBuilderTool : MonoBehaviour
         Gizmos.color = Color.blue;
         Handles.Label(new Vector3(0.0f, _waterLineYPosition, 0.0f), "Water Line");
         Gizmos.DrawRay(new Vector3(0.0f, _waterLineYPosition, 0.0f), Vector3.forward * 1000);
+    }
+
+    private void DrawPlayerEndPositionGuide()
+    {
+        if (_sectionAudioClip == null)
+        {
+            return;
+        }
+
+        Gizmos.color = Color.green;
+
+        // Calculate player end positions
+        float _playerEndMinDistance = _sectionAudioClip.length *
+            (_gameplaySettings.PlayerBaseSpeed -
+            _gameplaySettings.PlayerSpeedDelta);
+        Vector3 _playerEndMinPosition = new Vector3(_minXBoundary, 0.0f, _playerEndMinDistance);
+        Gizmos.DrawLine(_playerEndMinPosition,
+            new Vector3(_maxXBoundary, 0.0f, _playerEndMinDistance));
+        Handles.Label(_playerEndMinPosition, "Min Distance");
+
+        float _playerEndMaxDistance = _sectionAudioClip.length *
+            (_gameplaySettings.PlayerBaseSpeed +
+            _gameplaySettings.PlayerSpeedDelta);
+        Vector3 _playerEndMaxPosition = new Vector3(_minXBoundary, 0.0f, _playerEndMaxDistance);
+        Gizmos.DrawLine(_playerEndMaxPosition,
+            new Vector3(_maxXBoundary, 0.0f, _playerEndMaxDistance));
+        Handles.Label(_playerEndMaxPosition, "Max Distance");
+
+        float _playerEndBaseDistance = _sectionAudioClip.length *
+            _gameplaySettings.PlayerBaseSpeed;
+        Vector3 _playerEndBasePosition = new Vector3(_minXBoundary, 0.0f, _playerEndBaseDistance);
+        Gizmos.DrawLine(_playerEndBasePosition,
+            new Vector3(_maxXBoundary, 0.0f, _playerEndBaseDistance));
+        Handles.Label(_playerEndBasePosition, "Base Distance");
+        
+
     }
 
     private void DrawPlayerStartPositionGuide()

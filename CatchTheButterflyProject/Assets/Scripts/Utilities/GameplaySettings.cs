@@ -98,6 +98,18 @@ public class GameplaySettings : ScriptableObject
     public bool OnlyJumpWhenDrowning = false;
 
     /// <summary>
+    /// How fast does the player move normally?
+    /// </summary>
+    [Tooltip("How fast does the player move normally?")]
+    public float PlayerBaseSpeed = 1.0f;
+
+    /// <summary>
+    /// How much faster/slower can the player move than normal?
+    /// </summary>
+    [Tooltip("How much faster/slower can the player move than normal?")]
+    public float PlayerSpeedDelta = 0.5f;
+
+    /// <summary>
     /// When the player hits a rock, should the audio rewind?
     /// </summary>
     [Tooltip("When the player hits a rock, should the audio rewind?")]

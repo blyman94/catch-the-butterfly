@@ -20,6 +20,8 @@ public class GameplaySettingsEditor : Editor
     private SerializedProperty _constantMoveSpeedProperty;
     private SerializedProperty _moveForceGroundedProperty;
     private SerializedProperty _downstreamMaxSpeedIncreaseProperty;
+    private SerializedProperty _playerBaseSpeedProperty;
+    private SerializedProperty _playerSpeedDeltaProperty;
     private SerializedProperty _upstreamMaxSpeedProperty;
     private SerializedProperty _useConstantMoveSpeed;
 
@@ -60,6 +62,8 @@ public class GameplaySettingsEditor : Editor
         _constantMoveSpeedProperty = serializedObject.FindProperty("ConstantMoveSpeed");
         _downstreamMaxSpeedIncreaseProperty = serializedObject.FindProperty("DownstreamMaxSpeedIncrease");
         _moveForceGroundedProperty = serializedObject.FindProperty("MoveForceGrounded");
+        _playerBaseSpeedProperty = serializedObject.FindProperty("PlayerBaseSpeed");
+        _playerSpeedDeltaProperty = serializedObject.FindProperty("PlayerSpeedDelta");
         _upstreamMaxSpeedProperty = serializedObject.FindProperty("UpstreamMaxSpeed");
         _useConstantMoveSpeed = serializedObject.FindProperty("UseConstantMoveSpeed");
 
@@ -91,16 +95,12 @@ public class GameplaySettingsEditor : Editor
         EditorGUILayout.LabelField("Player Movement", EditorStyles.boldLabel);
         
         EditorGUILayout.PropertyField(_moveForceGroundedProperty);
+        EditorGUILayout.PropertyField(_playerBaseSpeedProperty);
         EditorGUILayout.PropertyField(_useConstantMoveSpeed);
         
-        if (_useConstantMoveSpeed.boolValue)
+        if (!_useConstantMoveSpeed.boolValue)
         {
-            EditorGUILayout.PropertyField(_constantMoveSpeedProperty);
-        }
-        else
-        {
-            EditorGUILayout.PropertyField(_downstreamMaxSpeedIncreaseProperty);
-            EditorGUILayout.PropertyField(_upstreamMaxSpeedProperty);
+            EditorGUILayout.PropertyField(_playerSpeedDeltaProperty);
         }
 
         EditorGUILayout.Space();

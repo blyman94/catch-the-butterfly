@@ -26,13 +26,15 @@ MonoBehaviour:
   MoveForceGrounded: 25
   MultiJump: 0
   OnlyJumpWhenDrowning: 1
+  PlayerBaseSpeed: 1
+  PlayerSpeedDelta: 0.5
   RewindAudio: 1
   RewindLength: 1.5
   TotalJumpCount: 1
   UpstreamMaxSpeed: 0.5
   UseCameraShake: 1
   UseColorDesaturation: 1
-  UseConstantMoveSpeed: 1
+  UseConstantMoveSpeed: 0
   UseGraphicsBlink: 1
   UseVignette: 1
   VignetteIntensity: 0.4

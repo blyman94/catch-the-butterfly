@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81851cd720ccf54c8898e8941257799, type: 3}
   m_Name: TestNewModule
   m_EditorClassIdentifier: 
-  ModuleName: 
-  RiverSectionData: {fileID: 0}
+  ModuleName: Test Module
+  RiverSectionData: {fileID: 11400000, guid: 9ba5ca53ed4ec89448c78e6cbb89dd9f, type: 2}

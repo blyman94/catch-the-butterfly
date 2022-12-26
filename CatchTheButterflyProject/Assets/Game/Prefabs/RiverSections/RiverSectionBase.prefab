@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e353f619dc7ca8e418169d7a249d9ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameplaySettings: {fileID: 11400000, guid: e94dd0e35c3e8ca468505d8d576ad523, type: 2}
+  _sectionAudioClip: {fileID: 8300000, guid: f14222191c870e34ca25dfb5a9a86e09, type: 3}
   _rockObstacleParent: {fileID: 2637310937226718971}
+  _dataStoragePath: Assets/Game/Data/RiverSectionData/
   _playerStartPosition: {x: 0, y: 0, z: 0}
   _minXBoundary: -2.52
   _maxXBoundary: 1.18

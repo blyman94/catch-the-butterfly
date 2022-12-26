@@ -10,6 +10,8 @@ public class SectionBuilderToolEditor : Editor
 
             GUI.enabled = !Application.isPlaying;
 
+            EditorGUILayout.Space();
+
             SectionBuilderTool s = target as SectionBuilderTool;
             if (GUILayout.Button("Store Data"))
                 s.StoreSectionData();
