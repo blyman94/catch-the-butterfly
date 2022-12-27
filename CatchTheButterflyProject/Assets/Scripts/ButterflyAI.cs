@@ -26,7 +26,6 @@ public class ButterflyAI : MonoBehaviour
 
     [Header("River Speeds")] 
     [SerializeField] private FloatVariable _baseRiverSpeed;
-    [SerializeField] private FloatVariable _currentRiverSpeed;
 
     private bool _isWaiting;
     private int _flyTriggerHash;
@@ -131,8 +130,8 @@ public class ButterflyAI : MonoBehaviour
     /// </summary>
     private void SelectRandomRelativeZSpeed()
     {
-        _relativeZSpeed = Random.Range(_relativeSpeedRange.x, _relativeSpeedRange.y) - 
-                          (_currentRiverSpeed.Value - _baseRiverSpeed.Value);
+        _relativeZSpeed = Random.Range(_relativeSpeedRange.x,
+            _relativeSpeedRange.y);
         _scroller.SetSpeedOverride(_relativeZSpeed);
     }
 
@@ -142,8 +141,8 @@ public class ButterflyAI : MonoBehaviour
     /// </summary>
     private void SelectRandomXOffset()
     {
-        float xOffsetMin = -(Mathf.Abs(_playerPosition.Value.x - _boundaryRange.x));
-        float xOffsetMax = (Mathf.Abs(_playerPosition.Value.x - _boundaryRange.y));
+        float xOffsetMin = -Mathf.Abs(_playerPosition.Value.x - _boundaryRange.x);
+        float xOffsetMax = Mathf.Abs(_playerPosition.Value.x - _boundaryRange.y);
 
         _xOffset = Random.Range(xOffsetMin, xOffsetMax);
     }
