@@ -13,4 +13,11 @@ MonoBehaviour:
   m_Name: TestNewModule
   m_EditorClassIdentifier: 
   ModuleName: Test Module
+  ModuleVoiceoverAudio: {fileID: 8300000, guid: f14222191c870e34ca25dfb5a9a86e09,
+    type: 3}
   RiverSectionData: {fileID: 11400000, guid: 9ba5ca53ed4ec89448c78e6cbb89dd9f, type: 2}
+  StartDelayMeters: 5
+  MinXPos: -2.52
+  MaxXPos: 1.18
+  MinZDist: 3
+  MaxZDist: 7

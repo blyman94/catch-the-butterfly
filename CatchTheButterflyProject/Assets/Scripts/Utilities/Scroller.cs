@@ -17,8 +17,8 @@ public class Scroller : MonoBehaviour
     private void OnEnable()
     {
         _scrollSpeed.VariableUpdated += SetSpeed;
+        SetSpeed();
     }
-
     private void Start()
     {
         SetSpeed();

@@ -7,12 +7,6 @@ using UnityEngine;
 public class GameplaySettings : ScriptableObject
 {
     /// <summary>
-    /// How long should it take for the audio to fade in and out?
-    /// </summary>
-    [Tooltip("How long should it take for the audio to fade in and out?")]
-    public float AudioFadeTime = 1.0f;
-
-    /// <summary>
     /// How much should the camera shake when a player collides with a rock?
     /// </summary>
     [Tooltip("How much should the camera shake when a player collides with " + 

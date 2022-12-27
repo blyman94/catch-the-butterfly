@@ -11,6 +11,9 @@ public class SectionBuilderTool : MonoBehaviour
     [SerializeField] private Transform _rockObstacleParent;
     [SerializeField] private string _dataStoragePath = "Assets/Game/Data/RiverSectionData/";
 
+    [Header("Where will the player be?")]
+    [SerializeField] private float _pointInClipSeconds = -1.0f;
+
     [Header("Object Guides")]
     [SerializeField] private Vector3 _playerStartPosition;
 
@@ -25,6 +28,7 @@ public class SectionBuilderTool : MonoBehaviour
         DrawLineGuides();
         DrawPlayerStartPositionGuide();
         DrawPlayerEndPositionGuide();
+        DrawWhatIfLines();
     }
     #endregion
 
@@ -83,7 +87,7 @@ public class SectionBuilderTool : MonoBehaviour
         Vector3 _playerEndMinPosition = new Vector3(_minXBoundary, 0.0f, _playerEndMinDistance);
         Gizmos.DrawLine(_playerEndMinPosition,
             new Vector3(_maxXBoundary, 0.0f, _playerEndMinDistance));
-        Handles.Label(_playerEndMinPosition, "Min Distance");
+        Handles.Label(_playerEndMinPosition, "Min Position at Clip End");
 
         float _playerEndMaxDistance = _sectionAudioClip.length *
             (_gameplaySettings.PlayerBaseSpeed +
@@ -91,16 +95,14 @@ public class SectionBuilderTool : MonoBehaviour
         Vector3 _playerEndMaxPosition = new Vector3(_minXBoundary, 0.0f, _playerEndMaxDistance);
         Gizmos.DrawLine(_playerEndMaxPosition,
             new Vector3(_maxXBoundary, 0.0f, _playerEndMaxDistance));
-        Handles.Label(_playerEndMaxPosition, "Max Distance");
+        Handles.Label(_playerEndMaxPosition, "Max Position at Clip End");
 
         float _playerEndBaseDistance = _sectionAudioClip.length *
             _gameplaySettings.PlayerBaseSpeed;
         Vector3 _playerEndBasePosition = new Vector3(_minXBoundary, 0.0f, _playerEndBaseDistance);
         Gizmos.DrawLine(_playerEndBasePosition,
             new Vector3(_maxXBoundary, 0.0f, _playerEndBaseDistance));
-        Handles.Label(_playerEndBasePosition, "Base Distance");
-        
-
+        Handles.Label(_playerEndBasePosition, "Base Position at Clip End");
     }
 
     private void DrawPlayerStartPositionGuide()
@@ -108,5 +110,37 @@ public class SectionBuilderTool : MonoBehaviour
         Gizmos.color = new Color(0, 1, 0, 0.25f);
         Handles.Label(_playerStartPosition, "Player");
         Gizmos.DrawCube(_playerStartPosition, Vector3.one * 0.25f);
+    }
+
+    private void DrawWhatIfLines()
+    {
+        Gizmos.color = Color.yellow;
+
+        if (_pointInClipSeconds > 0.0f)
+        {
+            // Calculate player end positions
+            float _playerEndMinDistance = _pointInClipSeconds *
+                (_gameplaySettings.PlayerBaseSpeed -
+                _gameplaySettings.PlayerSpeedDelta);
+            Vector3 _playerEndMinPosition = new Vector3(_maxXBoundary, 0.0f, _playerEndMinDistance);
+            Gizmos.DrawLine(_playerEndMinPosition,
+                new Vector3(_minXBoundary, 0.0f, _playerEndMinDistance));
+            Handles.Label(_playerEndMinPosition, "Minimum Potential Position");
+
+            float _playerEndMaxDistance = _pointInClipSeconds *
+                (_gameplaySettings.PlayerBaseSpeed +
+                _gameplaySettings.PlayerSpeedDelta);
+            Vector3 _playerEndMaxPosition = new Vector3(_maxXBoundary, 0.0f, _playerEndMaxDistance);
+            Gizmos.DrawLine(_playerEndMaxPosition,
+                new Vector3(_minXBoundary, 0.0f, _playerEndMaxDistance));
+            Handles.Label(_playerEndMaxPosition, "Max Potential Position");
+
+            float _playerEndBaseDistance = _pointInClipSeconds *
+                _gameplaySettings.PlayerBaseSpeed;
+            Vector3 _playerEndBasePosition = new Vector3(_maxXBoundary, 0.0f, _playerEndBaseDistance);
+            Gizmos.DrawLine(_playerEndBasePosition,
+                new Vector3(_minXBoundary, 0.0f, _playerEndBaseDistance));
+            Handles.Label(_playerEndBasePosition, "Base Potential Position");
+        }
     }
 }

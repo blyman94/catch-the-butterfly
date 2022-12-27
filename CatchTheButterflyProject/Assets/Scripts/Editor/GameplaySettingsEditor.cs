@@ -9,7 +9,6 @@ using UnityEditor;
 public class GameplaySettingsEditor : Editor
 {
     // Audio
-    private SerializedProperty _audioFadeTimeProperty;
     private SerializedProperty _defaultMusicVolumeProperty;
     private SerializedProperty _defaultSFXVolumeProperty;
     private SerializedProperty _defaultVoiceVolumeProperty;
@@ -51,7 +50,6 @@ public class GameplaySettingsEditor : Editor
     private void OnEnable()
     {
         // Audio 
-        _audioFadeTimeProperty = serializedObject.FindProperty("AudioFadeTime");
         _defaultMusicVolumeProperty = serializedObject.FindProperty("DefaultMusicVolume");
         _defaultSFXVolumeProperty = serializedObject.FindProperty("DefaultSFXVolume");
         _defaultVoiceVolumeProperty = serializedObject.FindProperty("DefaultVoiceVolume");
@@ -148,7 +146,6 @@ public class GameplaySettingsEditor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Audio", EditorStyles.boldLabel);
-        EditorGUILayout.PropertyField(_audioFadeTimeProperty);
         EditorGUILayout.PropertyField(_rewindAudioProperty);
         if (_rewindAudioProperty.boolValue)
         {

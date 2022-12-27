@@ -1,27 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-/// <summary>
-/// A module represents a chunk of the level that corresponds with a particular
-/// voiceover segment.
-/// </summary>
 [CreateAssetMenu]
 public class Module : ScriptableObject
 {
     public string ModuleName;
-    public AudioClip[] VoiceoverClips;
-    public GameObject[] FixedSectionSequence;
-    public GameObject[] RandomSections;
+    public AudioClip ModuleVoiceoverAudio;
+    public RiverSectionData RiverSectionData;
+    public float StartDelayMeters = 5.0f;
 
-    public GameObject GetRandomRiverSectionPrefab()
-    {
-        return RandomSections[Random.Range(0, RandomSections.Length)];
-    }
-
-    public GameObject GetFixedSection(int sectionIndex)
-    {
-        return FixedSectionSequence[sectionIndex];
-    }
+    [Header("Random Spawn Data")]
+    public float MinXPos = -2.52f;
+    public float MaxXPos = 1.18f;
+    public float MinZDist = 3.0f;
+    public float MaxZDist = 3.0f;
 }

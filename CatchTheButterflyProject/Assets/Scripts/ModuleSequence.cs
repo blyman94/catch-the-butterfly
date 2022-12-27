@@ -1,24 +1,129 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class ModuleSequence : MonoBehaviour
 {
-    [SerializeField] private GameplaySettings _gameplaySettings;
+    [Header("Component References")]
     [SerializeField] private AudioSource _voiceoverAudioSource;
     [SerializeField] private AudioFader _voiceoverAudioFader;
-    [SerializeField] private Module[] _modules;
-    [SerializeField] private GameObject _gameEndSectionPrefab;
     [SerializeField] private TextMeshProUGUI _chapterNameText;
-    [SerializeField] private GameEvent _moduleStartEvent;
+    [SerializeField] private Transform _spawnTransform;
+    [SerializeField] private ObstaclePool _obstaclePool;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject _goalPrefab;
+
+    [Header("Data")]
+    [SerializeField] private GameplaySettings _gameplaySettings;
+    [SerializeField] private Module[] _modules;
+    [SerializeField] private FloatVariable _currentRiverSpeedVariable;
     [SerializeField] private BoolVariable _isDrown;
 
-    private int _moduleIndex = -1;
-    private int _clipIndex = -1;
-    private int _fixedRiverSectionIndex = 0;
+    [Header("Events")]
+    [SerializeField] private GameEvent _moduleStartEvent;
 
-    public void PauseVoiceOverPlayback()
+    // States
+    private bool _isDelaying = true;
+    private bool _isSpawningFromModule = false;
+    private bool _isSpawningRandomly = false;
+    private bool _isVoiceOverFinished = false;
+    private Module _currentModule;
+    private int _moduleIndex = 0;
+    private int _obstacleIndex = 0;
+    private float _sectionZ = 0.0f;
+    private float _randomSectionZ = 0.0f;
+    private float _randomZDist = 0.0f;
+
+    #region MonoBehaviour Methods
+    private void Start()
     {
-        _voiceoverAudioFader.FadeOut(_gameplaySettings.AudioFadeTime, true);
+        _moduleIndex = 0;
+        _sectionZ = 0;
+        _randomSectionZ = 0;
+        _currentModule = _modules[_moduleIndex];
+        _randomZDist = Random.Range(_currentModule.MinZDist,
+            _currentModule.MaxZDist);
+    }
+    private void Update()
+    {
+        if (!_isSpawningRandomly && !_isDrown.Value)
+        {
+            _sectionZ += _currentRiverSpeedVariable.Value * Time.deltaTime;
+        }
+
+        _isVoiceOverFinished = _voiceoverAudioSource.time >=
+            _voiceoverAudioSource.clip.length ||
+            _voiceoverAudioSource.time == 0.0f;
+
+        if (_isDelaying && !_isDrown.Value)
+        {
+            Debug.Log("In Delay State");
+            if (_sectionZ >= _currentModule.StartDelayMeters)
+            {
+                _voiceoverAudioSource.Play();
+                _chapterNameText.text = _modules[_moduleIndex].ModuleName;
+                _moduleStartEvent.Raise();
+                _sectionZ = 0;
+
+                _isDelaying = false;
+                _isSpawningFromModule = true;
+            }
+        }
+        else if (_isSpawningFromModule && !_isDrown.Value)
+        {
+            Debug.Log("In Module State");
+            var nextObstaclePos =
+                _modules[_moduleIndex].RiverSectionData.ObstaclePositions[_obstacleIndex];
+            if (_sectionZ >= nextObstaclePos.z)
+            {
+                var obstacle = _obstaclePool.Pool.Get();
+                obstacle.transform.position = new Vector3(nextObstaclePos.x,
+                    nextObstaclePos.y, _spawnTransform.position.z);
+                if (_obstacleIndex + 1 < _currentModule.RiverSectionData.ObstaclePositions.Count)
+                {
+                    _obstacleIndex++;
+                }
+                else
+                {
+                    _obstacleIndex = 0;
+                    _sectionZ = 0;
+
+                    if (_isVoiceOverFinished)
+                    {
+                        MoveToNextModule();
+                    }
+                    else
+                    {
+                        _randomSectionZ = 0;
+                        _isSpawningFromModule = false;
+                        _isSpawningRandomly = true;
+                    }
+                }
+            }
+        }
+        else if (_isSpawningRandomly || (_isDrown.Value && !_isVoiceOverFinished))
+        {
+            Debug.Log("In Random State");
+            _randomSectionZ += _currentRiverSpeedVariable.Value * Time.deltaTime;
+            if (_isVoiceOverFinished)
+            {
+                _obstacleIndex = 0;
+                _sectionZ = 0;
+                MoveToNextModule();
+            }
+            else
+            {
+                HandleRandomSpawn();
+            }
+        }
+    }
+    #endregion
+
+    public void PauseVoiceoverPlayback()
+    {
+        _voiceoverAudioFader.FadeOut(_gameplaySettings.DrownEffectFadeTime, true);
     }
 
     public void PlayVoiceOverPlayback()
@@ -35,78 +140,48 @@ public class ModuleSequence : MonoBehaviour
             }
         }
 
-        _voiceoverAudioFader.FadeIn(_gameplaySettings.AudioFadeTime, true);
+        _voiceoverAudioFader.FadeIn(_gameplaySettings.DrownEffectFadeTime, true);
     }
 
-    public void SpawnRiverSectionResponse()
+    private void HandleRandomSpawn()
     {
-        if (_voiceoverAudioSource.time >= _voiceoverAudioSource.clip.length ||
-            _voiceoverAudioSource.time == 0.0f)
+        if (_randomSectionZ >= _randomZDist)
         {
+            var randomX = Random.Range(_currentModule.MinXPos,
+                _currentModule.MaxXPos);
+            var obstacle = _obstaclePool.Pool.Get();
+            obstacle.transform.position = new Vector3(randomX,
+                0.0f, _spawnTransform.position.z);
+            _randomZDist = Random.Range(_currentModule.MinZDist,
+                _currentModule.MaxZDist);
+            _randomSectionZ = 0;
+        }
+    }
 
-            if (_moduleIndex != -1 && (_clipIndex + 1) < _modules[_moduleIndex].VoiceoverClips.Length)
+    private void MoveToNextModule()
+    {
+        if (_moduleIndex + 1 < _modules.Length)
+        {
+            _moduleIndex++;
+            _currentModule = _modules[_moduleIndex];
+            if (_currentModule.StartDelayMeters > 0.0f)
             {
-                _clipIndex++;
-                _voiceoverAudioSource.clip = _modules[_moduleIndex].VoiceoverClips[_clipIndex];
-                _voiceoverAudioSource.Play();
-                SpawnModuleSection();
-                return;
+                _isDelaying = true;
+                _isSpawningFromModule = false;
             }
-
-            MoveToNextModule();
+            else
+            {
+                _isSpawningFromModule = true;
+            }
         }
         else
         {
-            SpawnModuleSection();
+            _isSpawningFromModule = false;
+            _isSpawningRandomly = false;
+
+            Vector3 goalSpawnPos = new Vector3(0.0f,
+                0.0f, _spawnTransform.position.z);
+            Instantiate(_goalPrefab, goalSpawnPos, Quaternion.identity);
         }
     }
-
-    public void MoveToNextModule()
-    {
-        if ((_moduleIndex + 1) >= _modules.Length)
-        {
-            SpawnEndGameSection();
-            return;
-        }
-
-        if (_isDrown.Value)
-        {
-            SpawnModuleSection();
-            return;
-        }
-
-        _moduleIndex++;
-        _clipIndex = 0;
-        _fixedRiverSectionIndex = -1;
-        _voiceoverAudioSource.clip = _modules[_moduleIndex].VoiceoverClips[_clipIndex];
-        _voiceoverAudioSource.Play();
-        SpawnModuleSection();
-        _chapterNameText.text = _modules[_moduleIndex].ModuleName;
-        _moduleStartEvent.Raise();
-    }
-
-    private void SpawnModuleSection()
-    {
-        GameObject sectionToSpawn;
-        if (_fixedRiverSectionIndex + 1 <
-            _modules[_moduleIndex].FixedSectionSequence.Length)
-        {
-            _fixedRiverSectionIndex++;
-            sectionToSpawn = _modules[_moduleIndex]
-                .GetFixedSection(_fixedRiverSectionIndex);
-        }
-        else
-        {
-            sectionToSpawn =
-                _modules[_moduleIndex].GetRandomRiverSectionPrefab();
-        }
-
-        Instantiate(sectionToSpawn, new Vector3(0, 0, 24), Quaternion.identity);
-    }
-
-    private void SpawnEndGameSection()
-    {
-        Instantiate(_gameEndSectionPrefab, new Vector3(0, 0, 24), Quaternion.identity);
-    }
-
 }
