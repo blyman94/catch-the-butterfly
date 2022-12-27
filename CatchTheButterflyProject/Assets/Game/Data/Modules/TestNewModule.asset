@@ -17,6 +17,12 @@ MonoBehaviour:
     type: 3}
   RiverSectionData: {fileID: 11400000, guid: 9ba5ca53ed4ec89448c78e6cbb89dd9f, type: 2}
   StartDelayMeters: 5
+  Pickups:
+  - {fileID: 3077534550124867816, guid: d0ac7b4b2122e9247b214212a86ab801, type: 3}
+  - {fileID: 8709319315018801376, guid: 8be5c90e630af894aaf289aab1562164, type: 3}
+  PickupSpawnTimes:
+  - 10
+  - 20
   MinXPos: -2.52
   MaxXPos: 1.18
   MinZDist: 3

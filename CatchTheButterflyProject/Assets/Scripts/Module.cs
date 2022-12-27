@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +9,13 @@ public class Module : ScriptableObject
     public RiverSectionData RiverSectionData;
     public float StartDelayMeters = 5.0f;
 
+    [Header("Pickups")]
+    public GameObject[] Pickups;
+    public float[] PickupSpawnTimes;
+
     [Header("Random Spawn Data")]
     public float MinXPos = -2.52f;
     public float MaxXPos = 1.18f;
     public float MinZDist = 3.0f;
-    public float MaxZDist = 3.0f;
+    public float MaxZDist = 7.0f;
 }

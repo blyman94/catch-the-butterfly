@@ -35,11 +35,13 @@ public class ModuleSequence : MonoBehaviour
     private float _sectionZ = 0.0f;
     private float _randomSectionZ = 0.0f;
     private float _randomZDist = 0.0f;
+    private int _pickupIndex = 0;
 
     #region MonoBehaviour Methods
     private void Start()
     {
         _moduleIndex = 0;
+        _pickupIndex = 0;
         _sectionZ = 0;
         _randomSectionZ = 0;
         _currentModule = _modules[_moduleIndex];
@@ -57,9 +59,19 @@ public class ModuleSequence : MonoBehaviour
             _voiceoverAudioSource.clip.length ||
             _voiceoverAudioSource.time == 0.0f;
 
+        // Spawn Pickup
+        if (_pickupIndex < _currentModule.PickupSpawnTimes.Length && 
+            _voiceoverAudioSource.time >= _currentModule.PickupSpawnTimes[_pickupIndex])
+        {
+            var randomX = Random.Range(_currentModule.MinXPos,
+                _currentModule.MaxXPos);
+            Instantiate(_currentModule.Pickups[_pickupIndex], new Vector3(randomX,
+                0.0f, _spawnTransform.position.z), Quaternion.identity);
+            _pickupIndex++;
+        }
+
         if (_isDelaying && !_isDrown.Value)
         {
-            Debug.Log("In Delay State");
             if (_sectionZ >= _currentModule.StartDelayMeters)
             {
                 _voiceoverAudioSource.Play();
@@ -73,7 +85,6 @@ public class ModuleSequence : MonoBehaviour
         }
         else if (_isSpawningFromModule && !_isDrown.Value)
         {
-            Debug.Log("In Module State");
             var nextObstaclePos =
                 _modules[_moduleIndex].RiverSectionData.ObstaclePositions[_obstacleIndex];
             if (_sectionZ >= nextObstaclePos.z)
@@ -105,7 +116,6 @@ public class ModuleSequence : MonoBehaviour
         }
         else if (_isSpawningRandomly || (_isDrown.Value && !_isVoiceOverFinished))
         {
-            Debug.Log("In Random State");
             _randomSectionZ += _currentRiverSpeedVariable.Value * Time.deltaTime;
             if (_isVoiceOverFinished)
             {
@@ -163,6 +173,7 @@ public class ModuleSequence : MonoBehaviour
         if (_moduleIndex + 1 < _modules.Length)
         {
             _moduleIndex++;
+            _pickupIndex = 0;
             _currentModule = _modules[_moduleIndex];
             if (_currentModule.StartDelayMeters > 0.0f)
             {
