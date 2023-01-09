@@ -33,7 +33,7 @@ public class Scroller : MonoBehaviour
     {
         _override = true;
         _rigidbody.velocity = 
-            new Vector3(_rigidbody.velocity.x, 0.0f, -newSpeed);
+            new Vector3(_rigidbody.velocity.x, 0.0f, newSpeed);
     }
     
     /// <summary>

@@ -64,7 +64,6 @@ MonoBehaviour:
   _selectNewXOffsetTime: 2
   _selectNewBaseOffsetTime: 0.5
   _selectNewSpeedTime: 1
-  _baseRiverSpeed: {fileID: 11400000, guid: 4ec79c68183a7ed4a91f1d07218d1792, type: 2}
   _currentRiverSpeed: {fileID: 11400000, guid: b9dd0f04193fbaf4d8a6bb572f9cb7c3, type: 2}
 --- !u!114 &6784165867487679655
 MonoBehaviour:
@@ -80,6 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 3034571364606838304}
   _scrollSpeed: {fileID: 11400000, guid: b9dd0f04193fbaf4d8a6bb572f9cb7c3, type: 2}
+  useConstant: 0
+  _scrollSpeedConstant: 1
 --- !u!195 &3034571364606838305
 NavMeshAgent:
   m_ObjectHideFlags: 0
