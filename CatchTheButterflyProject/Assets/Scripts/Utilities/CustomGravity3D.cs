@@ -25,7 +25,7 @@ public class CustomGravity3D : MonoBehaviour
     public static float globalGravity = -9.81f;
 
     #region MonoBehaviour Methods
-    void OnEnable()
+    void Start()
     {
         Rb.useGravity = false;
     }

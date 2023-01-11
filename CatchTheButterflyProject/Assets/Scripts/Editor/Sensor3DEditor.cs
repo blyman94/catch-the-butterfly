@@ -17,6 +17,8 @@ public class Sensor3DEditor : Editor
     private SerializedProperty m_SensorActiveColorProperty;
     private SerializedProperty m_SensorInactiveColorProperty;
     private SerializedProperty m_SensorActiveProperty;
+    private SerializedProperty m_OnSwitchToActiveResponseProperty;
+    private SerializedProperty m_OnSwitchToInactiveResponseProperty;
 
     /// <summary>
     /// Should info be displayed in the editor?
@@ -34,6 +36,8 @@ public class Sensor3DEditor : Editor
         m_SensorActiveColorProperty = serializedObject.FindProperty("activeColor");
         m_SensorActiveProperty = serializedObject.FindProperty("active");
         m_SensorInactiveColorProperty = serializedObject.FindProperty("inactiveColor");
+        m_OnSwitchToActiveResponseProperty = serializedObject.FindProperty("_onSwitchToActiveResponse");
+        m_OnSwitchToInactiveResponseProperty = serializedObject.FindProperty("_onSwitchToInactiveResponse");
     }
 
     public override void OnInspectorGUI()
@@ -69,6 +73,10 @@ public class Sensor3DEditor : Editor
         {
             EditorGUILayout.PropertyField(m_SensorTagToSenseProperty);
         }
+
+        EditorGUILayout.LabelField("Event Responses", EditorStyles.boldLabel);
+        EditorGUILayout.PropertyField(m_OnSwitchToActiveResponseProperty);
+        EditorGUILayout.PropertyField(m_OnSwitchToInactiveResponseProperty);
 
         EditorGUILayout.LabelField("Colors", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(m_SensorActiveColorProperty);

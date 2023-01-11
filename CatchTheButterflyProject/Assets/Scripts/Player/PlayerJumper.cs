@@ -35,14 +35,6 @@ public class PlayerJumper : MonoBehaviour
     {
         numJumpsCurrent = GameplaySettings.TotalJumpCount;
     }
-    private void OnEnable()
-    {
-        GroundSensor.SensorStateChanged += ResetJumpCount;
-    }
-    private void OnDisable()
-    {
-        GroundSensor.SensorStateChanged -= ResetJumpCount;
-    }
     #endregion
 
     /// <summary>
@@ -73,9 +65,6 @@ public class PlayerJumper : MonoBehaviour
     /// </summary>
     public void ResetJumpCount()
     {
-        if (GroundSensor.Active)
-        {
-            numJumpsCurrent = GameplaySettings.TotalJumpCount;
-        }
+        numJumpsCurrent = GameplaySettings.TotalJumpCount;
     }
 }

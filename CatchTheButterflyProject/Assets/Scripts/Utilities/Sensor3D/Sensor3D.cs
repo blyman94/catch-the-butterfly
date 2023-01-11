@@ -71,6 +71,9 @@ public class Sensor3D : MonoBehaviour
     [Tooltip("Color of the gizmo depicting this sensor when inactive.")]
     [SerializeField] private Color inactiveColor = Color.white;
 
+    [SerializeField] private UnityEvent _onSwitchToActiveResponse;
+    [SerializeField] private UnityEvent _onSwitchToInactiveResponse;
+
     /// <summary>
     /// The sensor is considered active when it overlaps an object on 
     /// layerToSense and with the tagToSense (if SenseTag is true).
@@ -87,6 +90,14 @@ public class Sensor3D : MonoBehaviour
             {
                 active = value;
                 SensorStateChanged?.Invoke();
+                if (active)
+                {
+                    _onSwitchToActiveResponse?.Invoke();
+                }
+                else
+                {
+                    _onSwitchToInactiveResponse?.Invoke();
+                }
             }
         }
     }
@@ -122,11 +133,11 @@ public class Sensor3D : MonoBehaviour
         {
             case SensorShape.Box:
                 detectedColliders = Physics.OverlapBox(transform.position,
-                    boxSize * 0.5f, Quaternion.identity, layerToSense,QueryTriggerInteraction.Collide);
+                    boxSize * 0.5f, Quaternion.identity, layerToSense, QueryTriggerInteraction.Collide);
                 break;
             case SensorShape.Sphere:
                 detectedColliders = Physics.OverlapSphere(transform.position,
-                    radius, layerToSense,QueryTriggerInteraction.Collide);
+                    radius, layerToSense, QueryTriggerInteraction.Collide);
                 break;
             default:
                 break;

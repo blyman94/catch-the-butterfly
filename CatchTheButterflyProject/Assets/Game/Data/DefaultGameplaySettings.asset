@@ -24,7 +24,7 @@ MonoBehaviour:
   JumpForce: 2
   MoveForceGrounded: 25
   MultiJump: 0
-  OnlyJumpWhenDrowning: 1
+  OnlyJumpWhenDrowning: 0
   PlayerBaseSpeed: 1
   PlayerSpeedDelta: 0.5
   RewindAudio: 1
